@@ -1,8 +1,12 @@
 package com.stevelee.java;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,9 +42,11 @@ public class HomeController {
 	
 
 	 @RequestMapping(value = "/test1", method = RequestMethod.GET)
-	 public String test1(Model model) {
+	 public String test1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		 
+
 	  
-	  return "test1.tiles";  //Å¸ÀÏÁî Àû¿ë
+	  return "test1.tiles";  //Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 }
 	
 	
