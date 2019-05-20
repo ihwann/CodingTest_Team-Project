@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+@font-face { font-family: 'jua'; src: url(resources/font/jua.ttf) format('truetype'); } 
+@font-face { font-family: 'yeonsung'; src: url(resources/font/yeonsung.ttf) format('truetype'); } 
+
+.header { font-family: yeonsung; }
+
+body {
+	
+	margin-top: -8px;
+	background-color: #263747;
+}
+
+.guide-section-title {
+	font-size: 18px;
+	
+}
+
+.codehilite {
+	background-color: #202B3D;
+	border-radius: 12px;
+}
+
+.main-section {
+	
+	color:#B2C0CC;
+	
+}
+
+.table-test1{
+	color:white;
+	margin-left: 120px;
+}
+
+.table-test1 a{
+	color:#1ae6c1;
+	text-decoration: none;	
+}
+
+.highlight {
+	
+	color:#CDD7E0;
+	
+	
+}
+
+.guide-section {
+   float: left;
+   width: 45%;
+   margin-top:-8px;
+   border-right: 0.1em solid #ffffff;padding: 0.1em;
+   
+}
+
+.run-section {
+   float: right;
+   width: 54.6%;
+   margin-top:-8px;
+   
+   
+}
+
+
+.one {
+	margin-left: -8px;
+	
+}
+
+.codehilite2 {
+	
+	margin-left: 10px;
+	
+}
+
+
+.header li {
+	
+	//float:left;
+}

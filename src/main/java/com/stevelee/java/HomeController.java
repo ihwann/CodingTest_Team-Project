@@ -40,8 +40,15 @@ public class HomeController {
 	 @RequestMapping(value = "/test1", method = RequestMethod.GET)
 	 public String test1(Model model) {
 	  
-	  return "test1.tiles";  //타일즈 적용
+	  return "test1.tiles";  //
 	 }
-	
+
+
+	 @RequestMapping(value = "/index", method = RequestMethod.GET)
+	 public String index(Model model) {
+	  
+	  return "index.tiles";  //
+	 }
+	 
 	
 }
