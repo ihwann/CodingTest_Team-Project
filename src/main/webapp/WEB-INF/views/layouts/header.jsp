@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!--  
@@ -61,3 +62,4 @@ STE<p style="font-size: 50px;color:LightCyan;display: inline;font-stretch: 10">V
  -->
 			
 		
+
