@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!--  
@@ -20,7 +19,10 @@ STE<p style="font-size: 50px;color:LightCyan;display: inline;font-stretch: 10">V
 	</tr>
 	<tr>
 		<td>
-			<p style="display: inline;margin-left: 500px;font-size: 13px; ;margin-top: 10px">코딩테스트</p>
+			<p style="display: inline;margin-left: 100px;font-size: 13px; ;margin-top: 10px">교육소개</p>
+			<p style="display: inline;margin-left: 20px;font-size: 13px; ;margin-top: 10px">포트폴리오</p>
+			<p style="display: inline;margin-left: 20px;font-size: 13px; ;margin-top: 10px">커뮤니티</p>
+			<p style="display: inline;margin-left: 20px;font-size: 13px; ;margin-top: 10px">코딩테스트</p>
 			<p style="display: inline;margin-left: 20px;font-size: 13px;margin-top: 10px">알고리즘문제</p>
 			<p style="display: inline;margin-left: 20px;font-size: 13px;margin-top: 10px">기출문제</p>
 			<p style="display: inline;margin-left: 20px;font-size: 13px;margin-top: 10px">나의통계</p>
