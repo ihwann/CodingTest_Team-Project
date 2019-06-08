@@ -44,15 +44,16 @@ public class TestMakeController {
 		 
 
 		TestMakeDao testdao = sqlSession.getMapper(TestMakeDao.class);
-		ArrayList<TestmakeCateDto> testcatelist = testdao.select_testmake_cate("");
+		ArrayList<TestmakeCateDto> testcatelist = testdao.select_testmake_cate("11_samsung");
 	  
 		for(TestmakeCateDto tdto:testcatelist) {
 			System.out.println("tdto cate: " + tdto.getTest_cate_name());
 			System.out.println("tdto type: " + tdto.getTest_type_name());
 		}
 		 
+		testdao.insert_testmake_cate(new TestmakeCateDto("t1", "t1", "한글1", "한글1"));
 
-	  return "testmake.tiles";  //
+	  return "test/testmake";  //
 
 	 }
 

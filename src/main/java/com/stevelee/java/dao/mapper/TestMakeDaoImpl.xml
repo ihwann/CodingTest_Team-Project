@@ -9,6 +9,10 @@
 		from tb_testmake_cate
 		where test_cate=#{param1}
 	</select>
+	
+	<insert id="insert_testmake_cate" parameterType="com.stevelee.java.dto.TestmakeCateDto">
+		insert into tb_testmake_cate(test_cate,test_type,test_cate_name,test_type_name) values(#{test_cate},#{test_type},#{test_cate_name},#{test_type_name})
+	</insert>	
 	<!-- 
 	<select id="loginchkDao" resultType="com.steveleejava.phoneStore.dto.LoginDto">
 		select storeid,storepw from phone_store where storeid=#{param1}

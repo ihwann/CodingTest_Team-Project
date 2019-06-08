@@ -10,6 +10,8 @@ import com.stevelee.java.dto.TestmakeCateDto;
 public interface TestMakeDao {
 	
 	public ArrayList<TestmakeCateDto> select_testmake_cate(String test_cate);		
+	public int insert_testmake_cate(TestmakeCateDto tdto);		
 
+	
 	
 }

@@ -41,22 +41,5 @@ public class HomeController {
 	}
 	
 
-	 @RequestMapping(value = "/test1", method = RequestMethod.GET)
-	 public String test1(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 
-
-	  
-
-	  return "test1.tiles";  //
-
-	 }
-
-
-	 @RequestMapping(value = "/index", method = RequestMethod.GET)
-	 public String index(Model model) {
-	  
-	  return "index.tiles";  //
-	 }
-	 
 	
 }
