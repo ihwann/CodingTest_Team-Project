@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stevelee.java.dao.TestMakeDao">
+	<select id="select_testmake_cate" resultType="com.stevelee.java.dto.TestmakeCateDto">
+		select	 *
+		from tb_testmake_cate
+		where test_cate=#{param1}
+	</select>
+	<!-- 
+	<select id="loginchkDao" resultType="com.steveleejava.phoneStore.dto.LoginDto">
+		select storeid,storepw from phone_store where storeid=#{param1}
+	</select>
+	
+	<select id="loginuserDao"  resultType="com.steveleejava.phoneStore.dto.StoreDto">
+		select	 storeid,
+			 storeaddr,
+			 storelevel,
+			 storetype,
+			 con_yn
+		from phone_store
+		where storeid=#{param1}
+	</select>
+
+	<insert id="regiuser" parameterType="com.steveleejava.phoneStore.dto.LoginDto">
+		insert into phone_store (storeid, storepw) values(#{storeid},#{storepw})
+	</insert>
+	
+	<insert id="regiphone" parameterType="com.steveleejava.phoneStore.dto.StoreDto">
+		insert into phone_item(phone_model_id,phone_name,phone_lease_price) values(#{phoneid},#{phonename},#{phoneprice})
+	</insert>
+	 -->
+</mapper>
