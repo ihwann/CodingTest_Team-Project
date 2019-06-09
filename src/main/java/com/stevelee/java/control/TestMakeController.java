@@ -51,9 +51,9 @@ public class TestMakeController {
 			System.out.println("tdto type: " + tdto.getTest_type_name());
 		}
 		 
-		testdao.insert_testmake_cate(new TestmakeCateDto("t1", "t1", "한글1", "한글1"));
+		//testdao.insert_testmake_cate(new TestmakeCateDto("t2", "t2", "한글1", "한글1"));
 
-	  return "test/testmake";  //
+	  return "test/testmake.tiles";  //
 
 	 }
 

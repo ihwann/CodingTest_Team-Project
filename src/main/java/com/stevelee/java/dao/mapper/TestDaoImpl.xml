@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stevelee.java.dao.TestDao">
+
+	<insert id="insert_result" parameterType="com.stevelee.java.dto.TestDto">
+		INSERT INTO tb_test_result(test_result_no, test_result_user, test_result_code, test_result, test_result_runingTime, test_result_useMemory, test_result_runingTime, test_result_count, test_result_error)
+		VALUE(#{result_no}, #{result_user}, #{reslult_code}, #{result}, #{result_time}, #{result_userMemory}, #{result_runingTime}, #{reslut_count}, #{result_error})
+	</insert>
+	
+	<select id="select_test" resultType="com.stevelee.java.dto.TestDto" parameterType="int">
+		select * from tb_testmake_contents
+		where test_no = #{no}
+	</select>
+
+</mapper>

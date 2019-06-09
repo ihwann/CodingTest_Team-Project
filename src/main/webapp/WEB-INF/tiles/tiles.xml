@@ -19,8 +19,8 @@
  <definition name="/web/*.tiles" extends="layouts-tiles">
   <put-attribute name="content"   value="/WEB-INF/views/web/{1}.jsp" />
  </definition>
- <definition name="/web/*/*.tiles" extends="layouts-tiles">
-  <put-attribute name="content"   value="/WEB-INF/views/web/{1}/{2}.jsp" />
+ <definition name="*/*.tiles" extends="layouts-tiles">
+  <put-attribute name="content"   value="/WEB-INF/views/{1}/{2}.jsp" />
  </definition>
  <definition name="/web/*/*/*.tiles" extends="layouts-tiles">
   <put-attribute name="content"   value="/WEB-INF/views/web/{1}/{2}/{3}.jsp" />
