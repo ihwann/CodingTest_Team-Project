@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.stevelee.java.dao.TestMakeDao;
 import com.stevelee.java.dto.TestmakeCateDto;
+import com.stevelee.java.dto.TestmakeSenttype;
 
 /**
  * Handles requests for the application home page.
@@ -33,23 +34,33 @@ public class TestMakeController {
 	 public String test1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		 
 
-	  
-
 	  return "test1.tiles";  //
 
 	 }
 	 
 	 @RequestMapping(value = "/testmake", method = RequestMethod.GET)
-	 public String testcate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	 public String testcate(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		 
 
 		TestMakeDao testdao = sqlSession.getMapper(TestMakeDao.class);
-		ArrayList<TestmakeCateDto> testcatelist = testdao.select_testmake_cate("11_samsung");
+		ArrayList<String> testcatelist = testdao.selectlist_testmake_cate();
+		ArrayList<TestmakeCateDto> testcatelist2 = testdao.selectlist_testmake_cate2();
 	  
-		for(TestmakeCateDto tdto:testcatelist) {
-			System.out.println("tdto cate: " + tdto.getTest_cate_name());
-			System.out.println("tdto type: " + tdto.getTest_type_name());
-		}
+		System.out.println(testcatelist.get(0));
+		System.out.println(testcatelist2.get(0).getTest_cate() + testcatelist2.get(0).getTest_cate_name());
+		
+		model.addAttribute("testcatelist", testcatelist);
+		model.addAttribute("testcatelist2", testcatelist2);
+		
+		ArrayList<TestmakeCateDto> testtype = testdao.selectlist_testmake_type();
+		model.addAttribute("testtype", testtype);
+		ArrayList<TestmakeCateDto> testtypebasic = testdao.selectlist_testmake_type_param(testcatelist2.get(0).getTest_cate());
+		model.addAttribute("testtypebasic", testtypebasic);
+		ArrayList<TestmakeCateDto> testtypess = testdao.selectlist_testmake_type_param(testcatelist2.get(1).getTest_cate());
+		model.addAttribute("testtypess", testtypess);
+		ArrayList<TestmakeSenttype> senttype = testdao.selectlist_testmake_senttype();
+		model.addAttribute("senttype", senttype);
+
 		 
 		//testdao.insert_testmake_cate(new TestmakeCateDto("t2", "t2", "한글1", "한글1"));
 
