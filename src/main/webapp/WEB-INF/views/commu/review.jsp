@@ -34,7 +34,7 @@
 	
 	<br><br>
 	
-	<div style="width:70%">
+	<div style="width:1400px">
 	
 	<table class="type09" style="margin-left: 40px">
     <thead>
