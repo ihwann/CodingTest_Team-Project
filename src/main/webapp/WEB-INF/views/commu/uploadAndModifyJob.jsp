@@ -30,12 +30,12 @@
     분야  &nbsp;
     	<select>
     		<option value="">--분야 선택--</option>
-    		<option value="1">금융 </option>
-    		<option value="2">제조  </option>
-    		<option value="3">병원 </option>
-    		<option value="4">공공기관  </option>
-    		<option value="5">이커머스  </option>
-    		<option value="6">기타   </option>
+    		<option value="fin">금융 </option>
+    		<option value="prod">제조  </option>
+    		<option value="hosp">병원 </option>
+    		<option value="publicIns">공공기관  </option>
+    		<option value="ecomm">이커머스  </option>
+    		<option value="etc">기타   </option>
     	
     	</select><br><br>
     </div>
@@ -46,7 +46,7 @@
     		<option value="seoul">서울  </option>
     		<option value="gyeonggi">경기  </option>
     		<option value="prov">지방  </option>
-    		<option value="abraod">해외  </option>
+    		<option value="abroad">해외  </option>
     	</select><br><br>
     </div>
     <div class="smsi_div">

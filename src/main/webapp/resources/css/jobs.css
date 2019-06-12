@@ -2,18 +2,17 @@
 
 .menu a{cursor:pointer;}
 
-    .menu .hide{display:none;}
-    
-    .choice_box {
+.menu .hide{display:none;}
+
+.choicebox {
     	width:480px;
     	background-color:transparent;
     	color:white;
     	
-    }
-    .choice_box{
+}
+.choice_box{
     	color:white;
-   
-    }
+}
     
 label,
 .text-style {
