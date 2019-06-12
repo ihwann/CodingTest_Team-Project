@@ -11,13 +11,13 @@
 	<div class="form-style">
 	<form>
 	<select>
-	    <option selected>회사 선택 </option>
-	    <option>삼성 </option>
-	    <option>SK</option>
-	    <option>LG</option>
-	    <option>한화 </option>
-	    <option>롯데 </option>
-	    <option>기타 </option>
+	    <option value="">--회사 선택-- </option>
+	    <option value="ss">삼성 </option>
+	    <option value="sk">SK</option>
+	    <option value="lg">LG</option>
+	    <option value="hh">한화 </option>
+	    <option value="lt">롯데 </option>
+	    <option value="etc">기타 </option>
 	</select>
 	<br>
 	<br>

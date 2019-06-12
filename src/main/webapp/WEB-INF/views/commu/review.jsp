@@ -14,12 +14,12 @@
 	<div>
 		<form style="display: inline; margin-left: 800px">
 			<select name="company" >
-				<option value="">회사 선택 </option>
+				<option value="">--회사 선택-- </option>
 				<option value="ss">삼성</option>
 				<option value="sk">SK</option>
 				<option value="lg">LG</option>
 				<option value="hh">한화</option>
-				<option value="lt">롯데</option>
+				<option value="lt">롯데</optio'n>
 				<option value="kt">KT</option>
 				<option value="etc">기타 </option>
 			</select>       
