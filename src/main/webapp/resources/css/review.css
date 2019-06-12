@@ -1,1 +1,98 @@
 @charset "UTF-8";
+
+select { 
+		width:120px;
+		height:40px;
+		text-align-last:center;
+		font-size:15pt;
+	}
+	.uploadselect{
+		width:200px;
+		height:50px;
+		text-align-last:center;
+		font-size:15pt;
+	}
+	
+	.myButton {
+		-moz-box-shadow: 0px 0px 0px 2px #646b80;
+		-webkit-box-shadow: 0px 0px 0px 2px #646b80;
+		box-shadow: 0px 0px 0px 2px #646b80;
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #cfd2d6));
+		background:-moz-linear-gradient(top, #ffffff 5%, #cfd2d6 100%);
+		background:-webkit-linear-gradient(top, #ffffff 5%, #cfd2d6 100%);
+		background:-o-linear-gradient(top, #ffffff 5%, #cfd2d6 100%);
+		background:-ms-linear-gradient(top, #ffffff 5%, #cfd2d6 100%);
+		background:linear-gradient(to bottom, #ffffff 5%, #cfd2d6 100%);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#cfd2d6',GradientType=0);
+		background-color:#ffffff;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+		border-radius:10px;
+		border:1px solid #6e6e6e;
+		display:inline-block;
+		cursor:pointer;
+		color:#666466;
+		font-family:Arial;
+		font-size:18px;
+		padding:10px 20px;
+		text-decoration:none;
+		text-shadow:0px 1px 0px #283966;
+	}
+	.myButton:hover {
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #cfd2d6), color-stop(1, #ffffff));
+		background:-moz-linear-gradient(top, #cfd2d6 5%, #ffffff 100%);
+		background:-webkit-linear-gradient(top, #cfd2d6 5%, #ffffff 100%);
+		background:-o-linear-gradient(top, #cfd2d6 5%, #ffffff 100%);
+		background:-ms-linear-gradient(top, #cfd2d6 5%, #ffffff 100%);
+		background:linear-gradient(to bottom, #cfd2d6 5%, #ffffff 100%);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#cfd2d6', endColorstr='#ffffff',GradientType=0);
+		background-color:#cfd2d6;
+	}
+	.myButton:active {
+		position:relative;
+		top:1px;
+	}
+    .keyword {
+    	width:300px;
+		height:40px;
+		font-size:15pt;
+    }
+    
+    table.type09 {
+    width:1400;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 1.5;
+	
+}
+		table.type09 thead th {
+		    padding: 10px;
+		    font-weight: bold;
+		    vertical-align: top;
+		    color: white;
+		    font-size: 19px;
+		    text-align:center;
+		    border-bottom: 3px solid white;
+		}
+		table.type09 tbody th {
+		    width: 150px;
+		    padding: 10px;
+		    font-weight: bold;
+		    color:white;
+		    vertical-align: top;
+		    border-bottom: 1px solid #ccc;
+		    background: #f3f6f7;
+		}
+		table.type09 td {
+		    width: 350px;
+		    height:40px;
+		    padding: 10px;
+		    vertical-align: top;
+		    color:white;
+		    font-size:17px;
+		    border-bottom: 1px solid #ccc;
+		}
+		a:link {text-decoration: none; color:white;}
+		a:visited {text-decoration: none; color: white;}
+		a:active {text-decoration: none; color: white;}
+		a:hover {text-decoration: underline; color: #ffffb3;}

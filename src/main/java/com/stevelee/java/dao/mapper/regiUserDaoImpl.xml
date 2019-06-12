@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stevelee.java.dao.regiUserDao">
+	<insert id="insert_regiUser"
+		parameterType="com.stevelee.java.dto.regi_UserDto">
+		insert into tb_regiUser(user_eMail, user_pw, user_nickName)
+		values(#{user_eMail},#{user_pw},#{user_nickName})
+	</insert>
+
+
+	<select id="select_email"
+		parameterType="String" resultType="int">
+		select count(*) from tb_regiUser
+		where user_eMail = (#{user_eMail})
+	</select>
+
+</mapper>

@@ -1,1 +1,44 @@
 @charset "UTF-8";
+
+.menu a{cursor:pointer;}
+
+.menu .hide{display:none;}
+
+.choicebox {
+    	width:480px;
+    	background-color:transparent;
+    	color:white;
+    	
+}
+.choice_box{
+    	color:white;
+}
+    
+label,
+.text-style {
+    font-size: .8rem;
+    letter-spacing: 1px;
+}
+.text-style {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-style {
+	margin:0 auto;
+	width:1800px;
+	color:white;
+}
+select {
+	
+	width:200px;
+	
+}
