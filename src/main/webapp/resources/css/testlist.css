@@ -1,1 +1,30 @@
 @charset "UTF-8";
+
+.box{
+	
+	display: flex;
+
+	width: 100%; 
+	padding: 150px 10px;
+}
+.testlist_item{
+	flex-grow: 1;
+	background-color: #65B6F7;
+}
+
+.testlist_item:nth-child(2){
+	flex-grow: 2;
+background-color: white;
+	
+}
+
+
+.testlist_scroll{
+	
+	overflow:auto;
+	height: 500px;
+	
+}
+table{
+	width: 100%;
+}
