@@ -12,40 +12,41 @@ $(document).ready(function() {
 $('#user_eMail').blur(function() {
 	var user_eMail = $('#user_eMail').val();
 	var emailExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	$.ajax({
-		url : '${pageContext.request.contextPath}/eMailchk?user_eMail='+ user_eMail,
-		type : 'get',
-		success : function(data) {
-			console.log("1 = 중복o / 0 = 중복x : "+ data);							
-			
-			if (data >= 1) {
-					// 1 : 아이디가 중복되는 문구
-					$("#email_check").text("사용중인 이메일입니다");
-					$("#email_check").css("color", "red");
-					$("#reg_submit").attr("disabled", true);
-				} else {
-					if(user_eMail.match(emailExp) != null){
-						$("#email_check").text("올바른 이메일 형식이 아닙니다.");
+	
+	if(!(user_eMail.match(emailExp))){
+		$("#email_check").text("올바른 이메일 형식이 아닙니다.");
+		$("#email_check").css("color", "red");
+		$("#reg_submit").attr("disabled", true);
+	}else{
+		$.ajax({
+			url : '${pageContext.request.contextPath}/eMailchk?user_eMail='+ user_eMail,
+			type : 'get',
+			success : function(data) {
+				console.log("1 >= 중복o / 0 = 중복x : "+ data);							
+				
+				if (data >= 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#email_check").text("사용중인 이메일입니다");
 						$("#email_check").css("color", "red");
 						$("#reg_submit").attr("disabled", true);
-					}else{
+					} else {
 						$("#email_check").text("사용가능한 이메일 입니다.");
 						$("#email_check").css("color", "white");
 						$("#reg_submit").attr("disabled", false);	
+						
 					}
-					
+				}, error : function() {
+						console.log("실패");
 				}
-			}, error : function() {
-					console.log("실패");
-			}
-		});
+			});
+		}
 	});
 });
 </script>
 <script>
 	$(document).ready(function() {
 		$("#user_pw2").blur(function() {
-			if ($('#user_pw1').val() != $(this).val()) {
+			if ($('#user_pw').val() != $(this).val()) {
 				$("#pw2_check").text("비밀번호가 일치하지 않습니다.");
 				$("#pw2_check").css("color", "red");
 				$("#reg_submit").attr("disabled", true);
