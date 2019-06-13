@@ -1,5 +1,6 @@
 package com.stevelee.java.control;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -48,7 +49,7 @@ public class regiController {
 
 	// 회원가입 컨트롤러
 	@RequestMapping(value = "/regiControl", method = RequestMethod.POST)
-	public String regiControl(regi_UserDto udto) throws Exception {
+	public String regiControl(regi_UserDto udto, ServletRequest request) throws Exception {
 		// 회원가입 메서드
 		System.out.println("회원가입메서드");
 		regi_service.userRegiService(udto);
@@ -76,7 +77,7 @@ public class regiController {
 	// 회원가입 완료 화면 매핑
 	@RequestMapping(value = "/regi_success", method = RequestMethod.GET)
 	public String regi_success(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		
 		return "user/regi_success.tiles"; //
 
 	}

@@ -8,8 +8,10 @@
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-1.11.3.min.js"></script>
 <title>Insert title here</title>
 
+
 <!--회원가입 유효성 검사   -->
 <script>
+// 회원가입 항목별 bool 체크 위한 배열선언
 var regi_formArr = new Array(4).fill(true);
     $(document).ready(function() {
     	
@@ -109,11 +111,12 @@ var regi_formArr = new Array(4).fill(true);
         	}
         });
         
-        // 가입완료 버튼 유효성 검사
+        // 가입하기 버튼 유효성 검사
         $("#reg_submit").click(function(){
         	var regi_formArr_chk = true;
             for(var i = 0; i<regi_formArr.length; i++){
             	if(regi_formArr[i] == false){
+            		// 회원가입 항목 중 한개라도 false면(유효성에 맞지 않다면) 회원가입 버튼 비활성화
             		regi_formArr_chk = false;
             		break;
             	}
@@ -130,42 +133,52 @@ var regi_formArr = new Array(4).fill(true);
 
 </head>
 <body>
-	<form method="post" action="/java/regiControl">
+	<form method="post" action="/java/regiControl" accept-charset="utf-8" align="center">
 
-			<!-- 본인확인 이메일 -->
-			<div class="form-group">
-				<label for="user_eMail">이메일</label>
-					<input type="text" class="form-control" name="user_eMail" id="user_eMail" placeholder="정확하게 써주세요" required>
-					<div class="check_font" id="email_check"></div>
-					</br>
-			</div>
-			<!-- 비밀번호 -->
-			<div class="form-group">
-				<label for="user_pw">비밀번호</label>
-					<input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="(6-20자) 문자 ,특수문자, 숫자 포함" required>
-				<div class="check_font" id="pw_check"></div></br>
-			</div>
-			<!-- 비밀번호 재확인 -->
-			<div class="form-group">
-				<label for="user_pw2">비밀번호 확인</label>
-					<input type="password" class="form-control" id="user_pw2" name="user_pw2" placeholder="(6-20자) 문자 ,특수문자, 숫자 포함" required>
-				<div class="check_font" id="pw2_check"></div></br>
-			</div>
-			<!-- 닉네임-->
-			<div class="form-group">
-				<label for="user_nickName">닉네임</label>
-					<input type="text" class="form-control" id="user_nickName" name="user_nickName" placeholder="숫자, 한글, 영문만 사용" required>
-				<div class="check_font" id="name_check"></div></br>
-			</div>
-		
-			<div class="reg_button">
-				<a class="btn btn-primary px-3" href="${pageContext.request.contextPath}">
-					<i class="fa fa-heart pr-2" aria-hidden="true"></i>취소하기
-				</a>&nbsp;&nbsp;
-				<button class="btn btn-primary px-3" id="reg_submit">
-					<i class="fa fa-heart pr-2" aria-hidden="true"></i>가입하기
-				</button>
-			</div>
+		<!-- 본인확인 이메일 -->
+		<div class="form-group">
+			<label for="user_eMail">이메일</label> <input type="text"
+				class="form-control" name="user_eMail" id="user_eMail"
+				placeholder="정확하게 써주세요" required>
+			<div class="check_font" id="email_check"></div>
+			</br>
+		</div>
+		<!-- 비밀번호 -->
+		<div class="form-group">
+			<label for="user_pw">비밀번호</label> <input type="password"
+				class="form-control" id="user_pw" name="user_pw"
+				placeholder="(6-20자) 문자 ,특수문자, 숫자 포함" required>
+			<div class="check_font" id="pw_check"></div>
+			</br>
+		</div>
+		<!-- 비밀번호 재확인 -->
+		<div class="form-group">
+			<label for="user_pw2">비밀번호 확인</label> <input type="password"
+				class="form-control" id="user_pw2" name="user_pw2"
+				placeholder="(6-20자) 문자 ,특수문자, 숫자 포함" required>
+			<div class="check_font" id="pw2_check"></div>
+			</br>
+		</div>
+		<!-- 닉네임-->
+		<div class="form-group">
+			<label for="user_nickName">닉네임</label> <input type="text"
+				class="form-control" id="user_nickName" name="user_nickName"
+				placeholder="숫자, 한글, 영문만 사용" required>
+			<div class="check_font" id="name_check"></div>
+			</br>
+		</div>
+
+		<div class="reg_button">
+			<button class="btn btn-primary px-3"
+				onclick="location='${pageContext.request.contextPath}'">
+				<i class="fa fa-heart pr-2" aria-hidden="true"></i>취소하기
+			</button>
+			&nbsp;&nbsp;
+			<button class="btn btn-primary px-3" id="reg_submit">
+				<i class="fa fa-heart pr-2" aria-hidden="true"></i>가입하기
+			</button>
+		</div>
+
 	</form>
 
 </body>
