@@ -56,12 +56,21 @@ public class regiController {
 	}
 
 	// 이메일 중복체크 컨트롤러
-	@RequestMapping(value = "/eMailchk", method = RequestMethod.GET)
+	@RequestMapping(value = "/eMailchk", method = RequestMethod.POST)
 	@ResponseBody // 필요한 이유 파악
 	public int eMailchk(@RequestParam("user_eMail") String user_eMail) throws Exception {
 		// 이메일 중복체크 메서드
 		System.out.println("이메일 중복체크메서드");
 		return regi_service.userEmailChk(user_eMail);
+	}
+	
+	// 닉네임 중복체크 컨트롤러
+	@RequestMapping(value = "/nickchk", method = RequestMethod.POST)
+	@ResponseBody // 필요한 이유 파악
+	public int nickchk(@RequestParam("user_nickName") String user_nickName) throws Exception {
+		// 닉네임 중복체크 메서드
+		System.out.println("닉네임 중복체크메서드");
+		return regi_service.usernickChk(user_nickName);
 	}
 
 	// 회원가입 완료 화면 매핑

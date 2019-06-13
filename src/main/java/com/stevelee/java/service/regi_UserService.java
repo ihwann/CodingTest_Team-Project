@@ -32,4 +32,13 @@ public class regi_UserService {
 		result = userDao.select_email(user_eMail);
 		return result;
 	}
+	
+	// 중복 닉네임 검사
+	public int usernickChk(String user_nickName) throws SQLException{
+		int result = 0;
+		
+		userDao = userSqlSession.getMapper(regiUserDao.class);
+		result = userDao.select_nick(user_nickName);
+		return result;
+	}
 }
