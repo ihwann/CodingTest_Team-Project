@@ -16,5 +16,11 @@
 		select count(*) from tb_regiUser
 		where user_eMail = (#{user_eMail})
 	</select>
+	
+	<select id="select_nick"
+		parameterType="String" resultType="int">
+		select count(*) from tb_regiUser
+		where user_nickName = (#{user_nickName})
+	</select>
 
 </mapper>

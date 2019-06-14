@@ -14,7 +14,7 @@
 		var chk1 = document.termsOK.termsAgree.checked;
 
 		if (!chk1) {
-			alert('약관에 동의해 주세요');
+			alert('약관 동의가 필요합니다.');
 			return false;
 		}
 		return true;
