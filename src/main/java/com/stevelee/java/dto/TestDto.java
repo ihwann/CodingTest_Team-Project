@@ -13,23 +13,30 @@ public class TestDto {
 	private int result_count;
 	private int result_error;
 	private int result_codeLength;
+	private char result_del;
+	private String result_regi;
+	private String cate;
 	
 	public TestDto(){}
 
-	public TestDto(int seq, int result_no, String result_user, String reslult_code, String result, int result_time,
-			int result_userMemory, int result_runingTime, int reslut_count, int result_error, int result_codeLength) {
+	public TestDto(int seq, int result_no, String result_user, String result_code, String result, int result_time,
+			int result_useMemory, int result_runingTime, int result_count, int result_error, int result_codeLength,
+			char result_del, String result_regi, String cate) {
 		super();
 		this.seq = seq;
 		this.result_no = result_no;
 		this.result_user = result_user;
-		this.result_code = reslult_code;
+		this.result_code = result_code;
 		this.result = result;
 		this.result_time = result_time;
-		this.result_useMemory = result_userMemory;
+		this.result_useMemory = result_useMemory;
 		this.result_runingTime = result_runingTime;
-		this.result_count = reslut_count;
+		this.result_count = result_count;
 		this.result_error = result_error;
 		this.result_codeLength = result_codeLength;
+		this.result_del = result_del;
+		this.result_regi = result_regi;
+		this.cate = cate;
 	}
 
 	public int getSeq() {
@@ -60,8 +67,8 @@ public class TestDto {
 		return result_code;
 	}
 
-	public void setResult_code(String reslult_code) {
-		this.result_code = reslult_code;
+	public void setResult_code(String result_code) {
+		this.result_code = result_code;
 	}
 
 	public String getResult() {
@@ -84,8 +91,8 @@ public class TestDto {
 		return result_useMemory;
 	}
 
-	public void setResult_useMemory(int result_userMemory) {
-		this.result_useMemory = result_userMemory;
+	public void setResult_useMemory(int result_useMemory) {
+		this.result_useMemory = result_useMemory;
 	}
 
 	public int getResult_runingTime() {
@@ -100,8 +107,8 @@ public class TestDto {
 		return result_count;
 	}
 
-	public void setResult_count(int reslut_count) {
-		this.result_count = reslut_count;
+	public void setResult_count(int result_count) {
+		this.result_count = result_count;
 	}
 
 	public int getResult_error() {
@@ -118,6 +125,30 @@ public class TestDto {
 
 	public void setResult_codeLength(int result_codeLength) {
 		this.result_codeLength = result_codeLength;
+	}
+
+	public char getResult_del() {
+		return result_del;
+	}
+
+	public void setResult_del(char result_del) {
+		this.result_del = result_del;
+	}
+
+	public String getResult_regi() {
+		return result_regi;
+	}
+
+	public void setResult_regi(String result_regi) {
+		this.result_regi = result_regi;
+	}
+
+	public String getCate() {
+		return cate;
+	}
+
+	public void setCate(String cate) {
+		this.cate = cate;
 	}
 
 }

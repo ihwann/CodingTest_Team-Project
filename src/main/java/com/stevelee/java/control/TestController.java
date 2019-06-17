@@ -36,25 +36,30 @@ public class TestController {
 	
     
     
-    // 문제작성화면 호출
+    // 문제유형 선택 후 내가 도전할 단계의 문제작성화면 호출
 	@RequestMapping(value = "/testcoding", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
-		// 화면에 보여줄 문제번호
-		int test_no = 142;
-		
+		// 로그인되어 있는 아이디 , 내가 선택한 문제 타입세팅
+		TestDto dto = new TestDto();
+		dto.setResult_user("steavelee");
+		dto.setCate("samsung");
+				
 		Map<String, String> map = new HashMap<String, String>();
 		
+		// 선택한 유형의 문제에서 내가 마지막으로 pass한 다음번째 문제의 정보 획득
+		// 만약 해당유형이 처음이거나 통과했던 문제가 없다면 첫번째 단계의 문제정보 획득
         TestDao testDao = sqlSession.getMapper(TestDao.class);
-        List<GetTestDto> list = testDao.select_test(test_no);
+        List<GetTestDto> list = testDao.select_test(dto);
         
+        // 획득한 dto를 model에 태워 프론트에 전달하기 위해 map형태로 변환
         for(int i = 0; i<list.size(); i++) {
         	map.put(list.get(i).getSent_type(), list.get(i).getSent_cont());
         }
 		
+        map.put("cate", dto.getCate());
         model.addAttribute("map", map);
         
-        System.out.println(map.get("sentence_title"));
 		
 		return "test/testcoding.tiles";
 	}

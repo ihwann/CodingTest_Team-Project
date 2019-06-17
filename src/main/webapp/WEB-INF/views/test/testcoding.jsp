@@ -19,8 +19,17 @@
 		
 	<!-- 문제유형 & 문제타입 -->
 	<div class="testcoding_header">
-		<h1 class="testName">삼성역량평가</h1>
-		<h3 class="testDetail">k번째 수열을 나타내는 N개의 수를 출력하거나, 몇 번째 수열인지를 출력하면 된다.</h3>
+		<h1 class="testName">문제유형 _ ${map.cate }</h1>
+	</div>
+	
+	<!-- 문제지도 -->
+	<div class="testcoding_map">
+		<div class="map">
+			<span>정렬문제</span>
+			<div class="map_overlay">
+				<i class="fas fa-lock"></i>
+			</div>
+		</div>
 	</div>
 	
 	
@@ -30,82 +39,49 @@
 	<div class="testInfo">
 		<div class="testInfo_top">
         	<div class="testInfo_top_top">
-          		<h3 class="testName2">집합</h3>
-          		<span class="testDetail2">비어있는 공집합 S가 주어졌을 때, 아래 연산을 수행하는 프로그램을 작성하시오.</span>
+          		<h3 class="testName2">${map.sentence_title }</h3>
+          		<span class="testDetail2">${map.sentence }</span>
 <pre class="testPre">
-add x: S에 x를 추가한다. (1 ≤ x ≤ 20) S에 x가 이미 있는 경우에는 연산을 무시한다.
-remove x: S에서 x를 제거한다. (1 ≤ x ≤ 20) S에 x가 없는 경우에는 연산을 무시한다.
-check x: S에 x가 있으면 1을, 없으면 0을 출력한다.
-toggle x: S에 x가 있으면 x를 제거하고, 없으면 x를 추가한다. (1 ≤ x ≤ 20)
-all: S를 {1, 2, ..., 20} 으로 바꾼다.
-empty: S를 공집합으로 바꾼다. 
+${map.sentence_strong }
 </pre>
 
 				<span class="testDetail2">입력</span>
 <pre class="testPre">
-첫째 줄에 수행해야 하는 연산의 수 M (1 ≤ M ≤ 3,000,000)이 주어진다.
-둘째 줄부터 M개의 줄에 수행해야 하는 연산이 한 줄에 하나씩 주어진다.              
+${map.sentence_input }            
 </pre>
 
 				<span class="testDetail2">출력</span>
 <pre class="testPre">
-check 연산이 주어질때마다, 결과를 출력한다.              
+${map.sentence_output }              
 </pre>
 			</div>
 
 		<div class="testInfo_top_bottom">
 			<div class="div_pre">
             	<span class="testDetail2">입력예시</span>
+<c:choose>
+<c:when test = "${map.sentence_inputex } eq null">
+입력 예시가 없는 문제입니다.
+</c:when>
+<c:otherwise>
 <pre class="testType">
-26
-add 1
-add 2
-check 1
-check 2
-check 3
-remove 2
-check 1
-check 2
-toggle 3
-check 1
-check 2
-check 3
-check 4
-all
-check 10
-check 20
-toggle 10
-remove 20
-check 10
-check 20
-empty
-check 1
-toggle 1
-check 1
-toggle 1
-check 1
+${map.sentence_inputex }
 </pre>
+</c:otherwise>
+</c:choose>
 			</div>
 			<div class="div_pre">
 			<span class="testDetail2">출력예시</span>
+<c:choose>
+<c:when test = "${map.sentence_outputex } eq null">
+출력 예시가 없는 문제입니다.
+</c:when>
+<c:otherwise>
 <pre class="testType">
-1
-1
-0
-1
-0
-1
-0
-1
-0
-1
-1
-0
-0
-0
-1
-0
+${map.sentence_outputex }
 </pre>
+</c:otherwise>
+</c:choose>
 				</div>
 			</div>
 		</div>
@@ -114,32 +90,37 @@ check 1
     
     
     	
-	<div class="result">
-		<div class="div_result">
-			<i class="fas cc fa-user-clock"></i>
-			<input type="text" value="대기중" readonly="readonly" class="timer input_result">
-			<i class="fas cc fa-ruler"></i>
-			<input type="text" value="대기중" readonly="readonly" class="codeLength input_result">
-			<i class="fas cc fa-microchip"></i>
-			<input type="text" value="대기중" readonly="readonly" class="memory input_result">
-			<i class="fas cc fa-tachometer-alt"></i>
-			<input type="text" value="대기중" readonly="readonly" class="runningTime input_result">
-			<i class="fas cc fa-check-circle"></i>
-			<input type="text" value="대기중" readonly="readonly" class="result input_result_last">
-		</div>
-	</div>
 
 
-
-	<!-- 문제푸는 영역 & 이전에 제출했던 내역조회 시작 -->
+	<!-- 문제푸는 영역 & 평가결과 조회 & 이전에 제출했던 내역선택하여 조회하는 창 시작 -->
 	<div class="testcoding_main">
 		<div class="testcoding_mian_left">
 			<div class="testcoding_mian_left_title">
-				<h1 class="testName2">삼성역량평가</h1>
-				<h3 class="testDetail2">삼성전자에 도전한다면 필수!!</h3>
+				<h1 class="testName3">코딩결과 출력</h1>
+				<label><span>${map.sentence_title }</span>문제 과거기록 조회</label>
+				<select>
+					<option value="">2019년 통과</option>
+					<option value="">2019년 임시저장</option>
+					<option value="">2019년 통과</option>
+				</select>
 			</div>	
 			<div class="testcoding_mian_left_detail">
-				<span class="testDetail3">${map.sentence_strong }</span><br><br><br>
+				<div class="div_result">
+					<i class="fas cc fa-user-clock"></i>
+					<input type="text" value="대기중" readonly="readonly" class="timer input_result">
+				</div>
+				<div class="div_result">
+					<i class="fas cc fa-ruler"></i>
+					<input type="text" value="대기중" readonly="readonly" class="codeLength input_result">
+					<i class="fas cc fa-microchip"></i>
+					<input type="text" value="대기중" readonly="readonly" class="memory input_result">
+				</div>
+				<div class="div_result">
+					<i class="fas cc fa-tachometer-alt"></i>
+					<input type="text" value="대기중" readonly="readonly" class="runningTime input_result">
+					<i class="fas cc fa-check-circle"></i>
+					<input type="text" value="대기중" readonly="readonly" class="result input_result">
+				</div>
 			</div>
 			<div class="testcoding_mian_left_hashtag">
 				<span class="hashtag">#기업평가</span>
@@ -156,7 +137,7 @@ check 1
 				<div id="editor" class="edtor"></div>
 		</div>
 	</div>
-	<!-- 문제푸는 영역종료 -->
+	<!-- 문제푸는 영역 & 평가결과 조회 & 이전에 제출했던 내역선택하여 조회하는 창 종료 -->
 	
 	
 	
@@ -179,6 +160,9 @@ check 1
 	</div>
  	<!-- 페이징영역 종료 -->
 </div>
+
+
+
 
 
 <script>

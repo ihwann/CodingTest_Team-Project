@@ -8,8 +8,28 @@
 	
 	
 	<!-- 선택한 문제 출력 -->	
-	<select id="select_test" resultType="com.stevelee.java.dto.GetTestDto" parameterType="int">
-		SELECT sent_type, sent_cont FROM tb_testmake_contents WHERE test_no = #{test_no}
+	<select id="select_test" resultType="com.stevelee.java.dto.GetTestDto" parameterType="com.stevelee.java.dto.TestDto">
+		SELECT *
+		FROM tb_testmake_contents
+		WHERE test_no = 
+			(
+				SELECT MIN(test_no)
+				FROM tb_testmake_title 
+				WHERE test_cate = #{cate}
+				AND test_no > 
+					(
+						SELECT NVL(MAX(test_result_no), 0)
+						FROM tb_test_result
+						WHERE test_result = "pass"
+						AND test_result_user = #{result_user}
+						AND test_result_no IN 
+							(
+								SELECT test_no
+								FROM tb_testmake_title
+								WHERE test_cate = #{cate}
+							)
+					)
+			)
 	</select>
 	
 	
@@ -26,7 +46,9 @@
 		test_result_runingTime, 
 		test_result_count, 
 		test_result_error, 
-		test_result_codeLength)
+		test_result_codeLength,
+		test_result_del,
+		test_result_regi)
 		VALUE(
 		#{result_no}, 
 		#{result_user}, 
@@ -37,7 +59,9 @@
 		#{result_runingTime},  
 		#{result_count}, 
 		#{result_error}, 
-		#{result_codeLength})
+		#{result_codeLength},
+		'N',
+		now())
 	</insert>
 	
 	

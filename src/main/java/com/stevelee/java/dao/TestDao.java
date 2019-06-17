@@ -9,6 +9,6 @@ import com.stevelee.java.dto.TestDto;
 
 
 public interface TestDao {
-	public  List<GetTestDto> select_test(int test_no);
+	public  List<GetTestDto> select_test(TestDto dto);
 	public void insert_result(TestDto dto);
 }
