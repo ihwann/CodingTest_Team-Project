@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-@font-face { font-family: 'jua'; src: url(resources/font/jua.ttf) format('truetype'); } 
-@font-face { font-family: 'yeonsung'; src: url(resources/font/yeonsung.ttf) format('truetype'); } 
+@font-face { font-family: 'jua'; src: url(../font/jua.ttf) format('truetype'); } 
+@font-face { font-family: 'yeonsung'; src: url(../font/yeonsung.ttf) format('truetype'); } 
 
 .header { font-family: yeonsung; }
 
@@ -76,4 +76,42 @@ body {
 .header li {
 	
 	//float:left;
+}
+
+
+/*  testview     */
+
+.testview_main_flex {
+	display:flex;
+	color:white;
+}
+
+.testlist_flex {
+	display:flex;
+	flex-direction: column;	
+	width:600px;
+}
+
+
+.testpreview_flex {
+	display:flex;
+	flex-direction: column;
+	;width: 800px;
+}
+
+
+.testtitle {
+	color:white;
+	font-size: 25px;
+}
+
+.li_mouseover {
+    cursor: pointer;
+	
+}
+
+.li_mouseover:hover {
+	color: -webkit-link;
+    text-decoration: underline;
+	
 }

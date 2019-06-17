@@ -3,7 +3,7 @@ package com.stevelee.java.dto;
 public class TestmakeTitleDto {
 	
 
-	String test_no;
+	int test_no;
 	String test_cate;
 	String test_type;
 	String test_title;
@@ -12,7 +12,7 @@ public class TestmakeTitleDto {
 		
 	}
 
-	public TestmakeTitleDto(String test_no, String test_cate, String test_type, String test_title) {
+	public TestmakeTitleDto(int test_no, String test_cate, String test_type, String test_title) {
 		super();
 		this.test_no = test_no;
 		this.test_cate = test_cate;
@@ -20,11 +20,11 @@ public class TestmakeTitleDto {
 		this.test_title = test_title;
 	}
 
-	public String getTest_no() {
+	public int getTest_no() {
 		return test_no;
 	}
 
-	public void setTest_no(String test_no) {
+	public void setTest_no(int test_no) {
 		this.test_no = test_no;
 	}
 

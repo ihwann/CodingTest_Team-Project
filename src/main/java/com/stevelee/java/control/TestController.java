@@ -51,9 +51,78 @@ public class TestController {
 	@RequestMapping(value = "/pratice111", method = RequestMethod.GET)
 	public String testWrite(Locale locale, Model model) {
 		
-		return "testcoding.tiles";
+		return "test/testcoding.tiles";
 	}
 	
+	// 텍스트에디터
+	@RequestMapping(value = "/editor", method = RequestMethod.GET)
+	public String editor(Locale locale, Model model) {
+		
+		return "test/editor.tiles";
+	}
+	// 문제작성 완료 후 문제 제출 -> 결과 보여주기
+	@RequestMapping(value = "/try1", method = RequestMethod.GET)
+	public String try1(Locale locale, Model model, HttpServletRequest request) throws Exception {
+		
+		TestDao dao = sqlSession.getMapper(TestDao.class);
+		TestDto dto = new TestDto();
+		
+		// 로그인 완성되면 세션에서 아이디 가져오는 로직 작성
+		String id = "steavelee";
+		
+		// 입력한 소스코드 받아오기
+		String body = "System.out.println(44);";
+		System.out.println(body);
+ 
+        // 프로젝트 Home Directory 경로 조회
+        String path = TestController.class.getProtectionDomain().getCodeSource().getLocation().getPath();   
+        System.out.println("path:" + path);
+        
+     // Class File 생성
+        File sourceFile = new File(path + "DynamicClass.java");
+
+        // 기본소스코드 양식과 입력받은 소스를 합쳐 완성된 소스 생성
+        StringBuffer sb = new StringBuffer();
+        	sb.append("public class DynamicClass {");
+        	sb.append("public static void main(String[] args) {");
+        	sb.append("System.gc();");
+        	sb.append("long before = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();");
+        	sb.append("long start = System.currentTimeMillis();");
+        	sb.append(body);
+        	sb.append("long end = System.currentTimeMillis();");
+        	sb.append("long time = end - start;");
+        	sb.append("long after = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();");
+        	sb.append("long usedMemory = (before - after)/1024/1024;");
+            sb.append("} }");
+        String source = sb.toString();
+        
+		// Class File에 소스입력
+		FileWriter fw = new FileWriter(sourceFile);
+		fw.write(source);
+		fw.flush();
+		fw.close();
+		
+		System.out.println("sourceFile.getPath() :" + sourceFile.getPath());
+        // Class File 컴파일
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        int result = compiler.run(null, System.out, System.out, sourceFile.getPath());
+        //int result = compiler.run(null, System.out, System.out, "DynamicClass.java");
+        
+	        if(result == 0) {
+	        	System.out.println("컴파일 성공");
+	        }else {
+	        	System.out.println("컴파일 에러");
+	        }
+        
+        // 컴파일된 Class를 Load
+        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] {new File(path + "DynamicClass").toURI().toURL()});
+        System.out.println("경로 : " + new File(path + "DynamicClass").toURI().toURL());
+        System.out.println("classLoader : " + classLoader);
+        Class<?> cls = Class.forName("DynamicClass", true, classLoader);
+        System.out.println("Load 성공");
+        
+        return "home.tiles";
+	}
 	
 	
 	

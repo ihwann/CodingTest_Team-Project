@@ -2,16 +2,16 @@ package com.stevelee.java.dto;
 
 public class TestmakeContentsDto {
 
-	String test_no;
+	int test_no;
 	String sent_type;
-	String sent_no;
+	int sent_no;
 	String sent_cont;
 	
 	public TestmakeContentsDto() {
 		
 	}
 
-	public TestmakeContentsDto(String test_no, String sent_type, String sent_no, String sent_cont) {
+	public TestmakeContentsDto(int test_no, String sent_type, int sent_no, String sent_cont) {
 		super();
 		this.test_no = test_no;
 		this.sent_type = sent_type;
@@ -19,11 +19,11 @@ public class TestmakeContentsDto {
 		this.sent_cont = sent_cont;
 	}
 
-	public String getTest_no() {
+	public int getTest_no() {
 		return test_no;
 	}
 
-	public void setTest_no(String test_no) {
+	public void setTest_no(int test_no) {
 		this.test_no = test_no;
 	}
 
@@ -35,11 +35,11 @@ public class TestmakeContentsDto {
 		this.sent_type = sent_type;
 	}
 
-	public String getSent_no() {
+	public int getSent_no() {
 		return sent_no;
 	}
 
-	public void setSent_no(String sent_no) {
+	public void setSent_no(int sent_no) {
 		this.sent_no = sent_no;
 	}
 

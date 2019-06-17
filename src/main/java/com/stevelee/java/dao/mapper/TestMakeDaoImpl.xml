@@ -10,9 +10,84 @@
 		where test_cate=#{param1}
 	</select>
 	
+	<select id="selectlist_testmake_cate" resultType="String">
+		select distinct test_cate_name 
+		from tb_testmake_cate
+		
+	</select>	
+
+	<select id="selectlist_testmake_cate2" resultType="com.stevelee.java.dto.TestmakeCateDto">
+		select test_cate, test_cate_name 
+		from tb_testmake_cate group by test_cate, test_cate_name
+		
+	</select>	
+	
+	
+	<select id="selectlist_testmake_type" resultType="com.stevelee.java.dto.TestmakeCateDto">
+		select test_type, test_type_name
+		from tb_testmake_cate group by test_type, test_type_name
+		
+	</select>	
+	
+	<select id="selectlist_testmake_type_param" resultType="com.stevelee.java.dto.TestmakeCateDto">
+		select test_type, test_type_name
+		from tb_testmake_cate 
+		where test_cate=#{param1}
+		group by test_type, test_type_name
+		
+	</select>	
+		
+		
+	<select id="selectlist_testmake_senttype" resultType="com.stevelee.java.dto.TestmakeSenttype">
+		select sent_type, sent_type_name
+		from tb_testmake_senttype ;
+		
+	</select>	
+		
+
+	<select id="selectmax_testmake_title" resultType="int">
+		select max(test_no) from tb_testmake_title;
+		
+	</select>	
+
+
+	<insert id="insert_testmake_title" parameterType="com.stevelee.java.dto.TestmakeTitleDto">
+		insert into tb_testmake_title(test_no,test_cate,test_type,test_title) values(#{test_no},#{test_cate},#{test_type},#{test_title})
+	</insert>	
+
+	<insert id="insert_testmake_contents" parameterType="com.stevelee.java.dto.TestmakeContentsDto">
+		insert into tb_testmake_contents(test_no,sent_type,sent_no,sent_cont) values(#{test_no},#{sent_type},#{sent_no},#{sent_cont})
+	</insert>			
+		
 	<insert id="insert_testmake_cate" parameterType="com.stevelee.java.dto.TestmakeCateDto">
 		insert into tb_testmake_cate(test_cate,test_type,test_cate_name,test_type_name) values(#{test_cate},#{test_type},#{test_cate_name},#{test_type_name})
 	</insert>	
+	
+	
+	<select id="selectlist_testmake_contents" resultType="com.stevelee.java.dto.TestmakeContentsDto">
+		select test_no, sent_type, sent_no, sent_cont
+		from tb_testmake_contents 
+		where test_no=#{param1}
+		order by sent_no
+		
+	</select>	
+	
+	<select id="selectlist_testview_list" resultType="com.stevelee.java.dto.TestviewListDto">
+		select test_no
+		,(select test_cate_name from tb_testmake_cate where test_cate = title.test_cate and test_type = title.test_type) test_cate
+		,(select test_type_name from tb_testmake_cate where test_cate = title.test_cate and test_type = title.test_type) test_type_name
+		,test_title  
+		from tb_testmake_title title
+		limit #{param1},#{param2};
+		
+	</select>
+	
+	<select id="selectlist_testview_list_cnt" resultType="int">
+		select count(1) from tb_testmake_title title;
+		
+	</select>
+	
+	
 	<!-- 
 	<select id="loginchkDao" resultType="com.steveleejava.phoneStore.dto.LoginDto">
 		select storeid,storepw from phone_store where storeid=#{param1}

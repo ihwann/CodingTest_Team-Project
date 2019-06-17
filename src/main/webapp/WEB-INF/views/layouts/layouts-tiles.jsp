@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
 
 <head>
-
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/contents.css" >

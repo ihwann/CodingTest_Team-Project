@@ -8,16 +8,17 @@
 
 <!-- ace editor -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.4/ace.js"></script>
+<!--<script src="${pageContext.request.contextPath}/resources/js/ace.js"></script>-->
 
 </head>
 
 <body>
-
+<iframe src="editor"></iframe>
 <div style="display:flex; align-items: center; justify-content: center; width: 100%; padding: 30px 0px;">
 
 	<div class="codingTest_main">
 		<div class="codingTest_main_left">
-			<div id="editor"></div>
+			<div id="editor">asdf</div>
 		</div>
 		
 		<div class="codingTest_main_right">
@@ -81,6 +82,7 @@
 	
 	
 	// 타이머
+	/*
 	var time = 0;
 	
 	function timer() {
@@ -89,7 +91,7 @@
 	}
 
 	setInterval(timer, 1000);				
-
+*/
 
 
 
