@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.stevelee.java.dto.ReviewDto"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +13,30 @@
 </head>
 <body>
 
+<%
+	ArrayList<ReviewDto> reviews = (ArrayList<ReviewDto>)request.getAttribute("reviewList");
+	
+	
+	/* 
+	for(int i = 0; i < reviews.size(); i++) {
+		System.out.println(reviews.get(i).getReview_title());
+		
+	} */
+	
 
+%>
 	<div>
 		<form style="display: inline; margin-left: 800px">
 			<select name="company" >
+				<%-- <c:forEach var="code" items="${ }" --%>
 				<option value="">--회사 선택-- </option>
 				<option value="ss">삼성</option>
 				<option value="sk">SK</option>
 				<option value="lg">LG</option>
 				<option value="hh">한화</option>
-				<option value="lt">롯데</optio'n>
+				<option value="lt">롯데</option>
 				<option value="kt">KT</option>
-				<option value="etc">기타 </option>
+				<option value="etc">기타 </option> 
 			</select>       
 			&nbsp; &nbsp;&nbsp; 
 			<input class="keyword"type="text" placeholder="Search..">

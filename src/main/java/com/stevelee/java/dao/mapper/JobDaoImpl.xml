@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stevelee.java.dao.JobDao">
+	<select id="select_all_job" resultType="com.stevelee.java.dto.JobDto" parameterType="int">
+		select * from tb_jobs
+		where review_num = #{jobs_num}
+		
+		
+	</select>
+	
+	<select id="select_all_job_main_lang" resultType="com.stevelee.java.dto.JobDto" parameterType="int">
+		select distinct jobs_main_lang from tb_review
+	</select>
+
+	
+</mapper>
