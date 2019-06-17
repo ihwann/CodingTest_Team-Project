@@ -1,15 +1,14 @@
 package com.stevelee.java.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.stevelee.java.dto.GetTestDto;
 import com.stevelee.java.dto.TestDto;
-import com.stevelee.java.dto.TestmakeCateDto;
-import com.stevelee.java.dto.TestmakeContentsDto;
+
 
 
 
 public interface TestDao {
-	public void insert_result(TestDto dto);		
-	public TestmakeContentsDto select_test(int no);	
-
+	public  List<GetTestDto> select_test(int test_no);
+	public void insert_result(TestDto dto);
 }

@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+#content {
+	padding-top: 150px;
+}

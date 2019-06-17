@@ -5,9 +5,13 @@ import java.io.FileWriter;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
@@ -17,8 +21,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.stevelee.java.dao.TestDao;
+import com.stevelee.java.dto.GetTestDto;
 import com.stevelee.java.dto.TestDto;
 
 @Controller
@@ -31,135 +37,69 @@ public class TestController {
     
     
     // 문제작성화면 호출
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/testcoding", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
-		//TestDao dao = sqlSession.getMapper(TestDao.class);
+		// 화면에 보여줄 문제번호
+		int test_no = 142;
 		
-		//int no = 1;
-		//model.addAttribute(dao.select_test(no));
-		System.out.println("d");
+		Map<String, String> map = new HashMap<String, String>();
 		
-		return "test/testcoding.tiles";
-	}
-	
-	
-	
-	
-	
-	// 문제리스트 -> 문제작성화면 이동
-	@RequestMapping(value = "/pratice111", method = RequestMethod.GET)
-	public String testWrite(Locale locale, Model model) {
-		
-		return "test/testcoding.tiles";
-	}
-	
-	// 텍스트에디터
-	@RequestMapping(value = "/editor", method = RequestMethod.GET)
-	public String editor(Locale locale, Model model) {
-		
-		return "test/editor.tiles";
-	}
-	// 문제작성 완료 후 문제 제출 -> 결과 보여주기
-	@RequestMapping(value = "/try1", method = RequestMethod.GET)
-	public String try1(Locale locale, Model model, HttpServletRequest request) throws Exception {
-		
-		TestDao dao = sqlSession.getMapper(TestDao.class);
-		TestDto dto = new TestDto();
-		
-		// 로그인 완성되면 세션에서 아이디 가져오는 로직 작성
-		String id = "steavelee";
-		
-		// 입력한 소스코드 받아오기
-		String body = "System.out.println(44);";
-		System.out.println(body);
- 
-        // 프로젝트 Home Directory 경로 조회
-        String path = TestController.class.getProtectionDomain().getCodeSource().getLocation().getPath();   
-        System.out.println("path:" + path);
+        TestDao testDao = sqlSession.getMapper(TestDao.class);
+        List<GetTestDto> list = testDao.select_test(test_no);
         
-     // Class File 생성
-        File sourceFile = new File(path + "DynamicClass.java");
+        for(int i = 0; i<list.size(); i++) {
+        	map.put(list.get(i).getSent_type(), list.get(i).getSent_cont());
+        }
+		
+        model.addAttribute("map", map);
+        
+        System.out.println(map.get("sentence_title"));
+		
+		return "test/testcoding.tiles";
+	}
+	
 
-        // 기본소스코드 양식과 입력받은 소스를 합쳐 완성된 소스 생성
-        StringBuffer sb = new StringBuffer();
-        	sb.append("public class DynamicClass {");
-        	sb.append("public static void main(String[] args) {");
-        	sb.append("System.gc();");
-        	sb.append("long before = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();");
-        	sb.append("long start = System.currentTimeMillis();");
-        	sb.append(body);
-        	sb.append("long end = System.currentTimeMillis();");
-        	sb.append("long time = end - start;");
-        	sb.append("long after = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();");
-        	sb.append("long usedMemory = (before - after)/1024/1024;");
-            sb.append("} }");
-        String source = sb.toString();
-        
-		// Class File에 소스입력
-		FileWriter fw = new FileWriter(sourceFile);
-		fw.write(source);
-		fw.flush();
-		fw.close();
-		
-		System.out.println("sourceFile.getPath() :" + sourceFile.getPath());
-        // Class File 컴파일
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        int result = compiler.run(null, System.out, System.out, sourceFile.getPath());
-        //int result = compiler.run(null, System.out, System.out, "DynamicClass.java");
-        
-	        if(result == 0) {
-	        	System.out.println("컴파일 성공");
-	        }else {
-	        	System.out.println("컴파일 에러");
-	        }
-        
-        // 컴파일된 Class를 Load
-        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] {new File(path + "DynamicClass").toURI().toURL()});
-        System.out.println("경로 : " + new File(path + "DynamicClass").toURI().toURL());
-        System.out.println("classLoader : " + classLoader);
-        Class<?> cls = Class.forName("DynamicClass", true, classLoader);
-        System.out.println("Load 성공");
-        
-        return "home.tiles";
-	}
 	
 	
 	
-	
-	// 문제작성 완료 후 문제 제출 -> 결과 보여주기
-	@RequestMapping(value = "/insertProblem", method = RequestMethod.POST)
-	public String insertProblem(Locale locale, Model model, HttpServletRequest request) throws Exception {
+	// 문제작성 완료 후 문제 제출시 결과확인 및 결과 저장
+	@ResponseBody
+	@RequestMapping(value = "/insertTest", method = RequestMethod.POST)
+	public Map<String, Object> insertProblem(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		TestDao dao = sqlSession.getMapper(TestDao.class);
 		TestDto dto = new TestDto();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// 로그인 완성되면 세션에서 아이디 가져오는 로직 작성
 		String id = "steavelee";
 		
-		// 입력한 소스코드 받아오기
+		// 사용자가 입력한 입력값  받아오기
 		String body = (String)request.getParameter("code");
-		System.out.println(body);
+		int timer = Integer.parseInt((String)request.getParameter("timer"));
+		int codeLength = Integer.parseInt((String)request.getParameter("codeLength"));
  
         // 프로젝트 Home Directory 경로 조회
-        String path = TestController.class.getProtectionDomain().getCodeSource().getLocation().getPath();    
+        String path = TestController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         
         // Class File 생성
-        File sourceFile = new File(path + "DynamicClass.java");
+        File sourceFile = new File(path + "/com/stevelee/java/dynamic/DynamicClass.java");
 
         // 기본소스코드 양식과 입력받은 소스를 합쳐 완성된 소스 생성
         StringBuffer sb = new StringBuffer();
         	sb.append("public class DynamicClass {");
-        	sb.append("public String runMethod() throws Exception {");
+        	sb.append("public long[] runMethod() throws Exception {");
         	sb.append("System.gc();");
-        	sb.append("long before = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();");
         	sb.append("long start = System.currentTimeMillis();");
+        	sb.append("long before = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();"); 
         	sb.append(body);
         	sb.append("long end = System.currentTimeMillis();");
-        	sb.append("long time = end - start;");
         	sb.append("long after = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();");
-        	sb.append("long usedMemory = (before - after)/1024/1024;");
-        	sb.append("return \"하이염\";");
+        	sb.append("long time = end - start;");
+        	sb.append("long usedMemory = (before - after)/1024/1024;");  
+        	sb.append("long[] result = {time, usedMemory};");
+        	sb.append("return result;");
             sb.append("} }");
         String source = sb.toString();
         
@@ -180,38 +120,76 @@ public class TestController {
 	        }
         
         // 컴파일된 Class를 Load
-        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] {new File(path + "DynamicClass").toURI().toURL()});
-        System.out.println("경로 : " + new File(path + "DynamicClass").toURI().toURL());
-        System.out.println("classLoader : " + classLoader);
+	    URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] {new File(path + "/com/stevelee/java/dynamic").toURI().toURL()});    	   
         Class<?> cls = Class.forName("DynamicClass", true, classLoader);
-        System.out.println("Load 성공");
-        
+
         // Load한 Class의 객체생성
         Object obj = cls.newInstance();
         
         // 컴파일된 Class파일의 함수를 선택하여 실행
         String methodName = "runMethod";
         Method objMethod = obj.getClass().getMethod(methodName);
-        String methodResult = (String)objMethod.invoke(obj);
- 
-        // 실행 결과 출력
-        System.out.print("result : " + methodResult);
+        long[] methodResult = (long[])objMethod.invoke(obj);
 
-        
-        dto.setResult_no(11);
+        // 결과값 dto세팅
+        dto.setResult_no(32);
         dto.setResult_user(id);
-        dto.setReslult_code("code");
+        dto.setResult_code(body);
         dto.setResult("통과");
-        dto.setResult_time(60);
-        dto.setResult_userMemory(300);
-        dto.setRuning_time(20);
-        dto.setReslut_count(11);
+        dto.setResult_time(timer);
+        dto.setResult_useMemory(300);
+        dto.setResult_runingTime(20);
+        dto.setResult_count(11);
         dto.setResult_error(1);
+        dto.setResult_codeLength(codeLength);
         
-        //dao.insert_result(dto);
-		//model.addAttribute(dto);
-
-		return "PraticeMain.tiles";
+        // 세팅된 dto를 db에 입력
+        TestDao testDao = sqlSession.getMapper(TestDao.class);
+        testDao.insert_result(dto);
+        
+        // 프론트단에 전달할 결과값이 담긴 Map생성
+        map.put("code", body);
+        map.put("result", "통과");
+        map.put("time", timer);
+        map.put("memory", 37);
+        map.put("runningtime", 20);
+        map.put("resultcount", 1);
+        map.put("error", 0);
+        map.put("codeLength", codeLength);
+        
+        System.out.println("time: " + methodResult[0]);
+        System.out.println("memory: " + methodResult[1]);
+		
+        
+        return map;
+	}
+	
+	
+	
+	
+	
+    // 문제 임시저장
+	@ResponseBody
+	@RequestMapping(value = "/saveCoding", method = RequestMethod.GET)
+	public String saveTest(Locale locale, Model model, HttpServletRequest request) {
+		
+		TestDto dto = new TestDto();
+		
+		// 입력값  받아오기
+		String id = "stevelee";
+		String body = (String)request.getParameter("code");
+		int timer = Integer.parseInt((String)request.getParameter("timer"));
+		int codeLength = Integer.parseInt((String)request.getParameter("codeLength"));
+		
+        // 임시저장 값 dto세팅
+        dto.setResult_no(32);
+        dto.setResult_user(id);
+        dto.setResult_code(body);
+        dto.setResult("임시저장");
+        dto.setResult_count(11);
+        dto.setResult_codeLength(codeLength);
+		
+		return "test/testcoding.tiles";
 	}
 }
 
