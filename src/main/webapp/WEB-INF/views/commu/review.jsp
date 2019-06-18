@@ -61,18 +61,18 @@
     </thead>
     <tbody>
     <tr>
-        <td><a href="">내용이 들어갑니다.</a></td>
+        <td><a class="aType" href="">내용이 들어갑니다.</a></td>
         <td>내용이 들어갑니다.</td>
         <td>내용이 들어갑니다.</td>
 
     </tr>
     <tr>
-        <td><a href="">내용이 들어갑니다.</a></td>
+        <td><a class="aType" href="">내용이 들어갑니다.</a></td>
         <td>내용이 들어갑니다.</td>
         <td>내용이 들어갑니다.</td>
     </tr>
     <tr>
-        <td><a href="">내용이 들어갑니다.</a></td>
+        <td><a class="aType" href="">내용이 들어갑니다.</a></td>
         <td>내용이 들어갑니다.</td>
         <td>내용이 들어갑니다.</td>
     </tr>

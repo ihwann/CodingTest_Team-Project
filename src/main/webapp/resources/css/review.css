@@ -92,7 +92,7 @@ select {
 		    font-size:17px;
 		    border-bottom: 1px solid #ccc;
 		}
-		a:link {text-decoration: none; color:white;}
-		a:visited {text-decoration: none; color: white;}
-		a:active {text-decoration: none; color: white;}
-		a:hover {text-decoration: underline; color: #ffffb3;}
+		.aType:link {text-decoration: none; color:white;}
+		.aType:visited {text-decoration: none; color: white;}
+		.aType:active {text-decoration: none; color: white;}
+		.aType:hover {text-decoration: underline; color: #ffffb3;}
