@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery/jquery-1.11.3.min.js"></script>
 
 <script type="text/javascript">
 
@@ -28,7 +31,7 @@
 		<div class="row">
 			<div class="terms-content">
 				<h4 align="center">
-					<font color="white">STEVELEEJAVA 이용약관 동의</font>
+					<font color="black">STEVELEEJAVA 이용약관 동의</font>
 				</h4>
 				<div
 					style="margin:auto; display: flex; justify-content: center; width: 50%; overflow: scroll; height: 200px; padding: 30px; background-color: white; border: 1px; solid: #ccc">
@@ -234,7 +237,7 @@
 						메일(stevelee@steveleejava.com)로 문의 주시기 바랍니다.</br>
 					</p>
 				</div>
-				</br>
+				
 				<h4 align="center">
 					<font color="white">개인정보 수집 및 이용에 대한 안내</font>
 				</h4>
@@ -303,12 +306,13 @@
 				<form name = "termsOK" role="form" action="/java/regi" onsubmit="return CheckForm(this)" align="center" method='POST'>
 					<div class="form-group" >
 						<label class="checkbox-inline"> <input type="checkbox"
-							name="termsAgree" id="termsAgree" value=""><font color="white">모든 약관에 동의합니다.</font>
+							name="termsAgree" id="termsAgree" value=""><font color="black" size="3px">모든 약관에 동의합니다.</font>
 						</label>
 					</div>
 					<br />
-					<button type="submit" class="btn btn-default">다음 단계</button>
+					<button type="submit" class="btn btn-primary">다음 단계</button>
 				</form>
+			</div>
 			</div>
 		</div>
 </body>
