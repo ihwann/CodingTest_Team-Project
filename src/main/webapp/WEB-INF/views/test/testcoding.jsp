@@ -30,6 +30,28 @@
 				<i class="fas fa-lock"></i>
 			</div>
 		</div>
+		
+		<div class="map_arrow">
+			<i class="fas fa-chevron-right"></i>
+		</div>
+		
+		<div class="map">
+			<span>정렬문제</span>
+			<div class="map_overlay">
+				<i class="fas fa-lock"></i>
+			</div>
+		</div>
+		
+		<div class="map_arrow">
+			<i class="fas fa-chevron-right"></i>
+		</div>
+		
+		<div class="map">
+			<span>정렬문제</span>
+			<div class="map_overlay">
+				<i class="fas fa-lock"></i>
+			</div>
+		</div>
 	</div>
 	
 	

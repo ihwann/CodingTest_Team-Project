@@ -88,7 +88,7 @@ public class TestController {
         // 프로젝트 Home Directory 경로 조회
         String path = TestController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         
-        // Class File 생성
+        // Java File 생성
         File sourceFile = new File(path + "/com/stevelee/java/dynamic/DynamicClass.java");
 
         // 기본소스코드 양식과 입력받은 소스를 합쳐 완성된 소스 생성
@@ -108,13 +108,13 @@ public class TestController {
             sb.append("} }");
         String source = sb.toString();
         
-		// Class File에 소스입력
+		// Java File에 소스입력
 		FileWriter fw = new FileWriter(sourceFile);
 		fw.write(source);
 		fw.flush();
 		fw.close();
 		
-        // Class File 컴파일
+        // Java 컴파일(class파일 생성)
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         int result = compiler.run(null, System.out, System.out, sourceFile.getPath());
         
@@ -124,14 +124,14 @@ public class TestController {
 	        	System.out.println("컴파일 에러");
 	        }
         
-        // 컴파일된 Class를 Load
+        // 생성된 Class를 Load
 	    URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] {new File(path + "/com/stevelee/java/dynamic").toURI().toURL()});    	   
         Class<?> cls = Class.forName("DynamicClass", true, classLoader);
 
         // Load한 Class의 객체생성
         Object obj = cls.newInstance();
         
-        // 컴파일된 Class파일의 함수를 선택하여 실행
+        // Class내부에 선언된 함수를 실행
         String methodName = "runMethod";
         Method objMethod = obj.getClass().getMethod(methodName);
         long[] methodResult = (long[])objMethod.invoke(obj);
@@ -140,7 +140,7 @@ public class TestController {
         dto.setResult_no(32);
         dto.setResult_user(id);
         dto.setResult_code(body);
-        dto.setResult("통과");
+        dto.setResult("pass");
         dto.setResult_time(timer);
         dto.setResult_useMemory(300);
         dto.setResult_runingTime(20);
@@ -152,7 +152,7 @@ public class TestController {
         TestDao testDao = sqlSession.getMapper(TestDao.class);
         testDao.insert_result(dto);
         
-        // 프론트단에 전달할 결과값이 담긴 Map생성
+        // 프론트에 전달할 결과값이 담긴 Map생성
         map.put("code", body);
         map.put("result", "통과");
         map.put("time", timer);
@@ -190,7 +190,7 @@ public class TestController {
         dto.setResult_no(32);
         dto.setResult_user(id);
         dto.setResult_code(body);
-        dto.setResult("임시저장");
+        dto.setResult("save");
         dto.setResult_count(11);
         dto.setResult_codeLength(codeLength);
 		
