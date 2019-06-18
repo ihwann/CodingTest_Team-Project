@@ -12,7 +12,7 @@ $(document).ready({
 	console.log(11);
 });
 */
-var testtypeitem_select_basic;
+/* var testtypeitem_select_basic;
 var testtypeitem_select_ss;
 $(document).ready(function(){
 	//alert(11);
@@ -48,7 +48,7 @@ $(document).ready(function(){
 		//alert(11);
 	}
 	
-	
+	 */
 	//ajax 사용 예제 1
 	//String 컨트롤러로 보내기	
 
@@ -70,14 +70,21 @@ $(document).ready(function(){
 	//ajax 사용 예제 2
 	//JSONArray 컨트롤러로 보내기
 	function test2_arrayajax(){
-		mytable = document.getElementById('serviceTbody');  //행을 추가할 테이블
+		mytable = document.getElementById('serviceTbody');  // 1. 행을 추가할 테이블 body
+		//getElemntById(); html에 id값을 가져오기
 		var dataArray = new Array();
 		
 		for(var i=0; i<mytable.rows.length; i++){
+			
+			//2. mytable.rows.length <tr></tr>  body 안에 tr 갯수
 		    var row = mytable.rows.item(i);
+		    //rows 컬렉션은 테이블에 있는 모든 <tr> 요소의 컬렉션을 반환함.
+		    //item 지정된 인덱스(0에서 시작)를 가진 콜렉션에서<tr>요소를 리턴함
 		    var dataObj = new Object();
             //var col0 = row.cells.item(0);   
             var col1 = row.cells.item(1); 
+            //rows.cells.length td 또는th 갯수
+            
             //dataObj.type = col0.firstChild.value;
             dataObj.contents = col1.firstChild.value;
 
@@ -96,11 +103,11 @@ $(document).ready(function(){
 		    data:JSON.stringify(dataArray),
 			success : function (data) {
 				
-				console.log(data);
+				 console.log(data);
 				
-				for(var i=0; i<data.length; i++){
+			 	for(var i=0; i<data.length; i++){
 					console.log(data[i].sent_type);
-					console.log(data[i].sent_type_name);
+					console.log(data[i].sent_type_name); 
 				}
 			
 			}

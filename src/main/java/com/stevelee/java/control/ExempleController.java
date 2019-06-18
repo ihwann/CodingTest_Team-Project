@@ -43,6 +43,7 @@ public class ExempleController {
 	//String 화면으로 보내기
     @RequestMapping(value="test1Ajax")
     @ResponseBody
+    // java 객체를 http 요정의 body 내용으로 매핑하는 역할을 합니다.
     public String test1Ajax (  HttpSession session, Model model
     		, Map<String, Object> modelMap
     		, HttpServletRequest request

@@ -5,25 +5,35 @@
 <head>
 <link href="resources/css/testlist.css" rel="stylesheet" type="text/css"> 
 
-<title>Insert title here</title>
+<script type="text/javascript">
+
+
+
+function testlist_ajax(){
+	S.ajax({
+	type : "get",
+	url : 'testListAjax',
+	data:{ "test_list" : "10"		
+	},
+	success : function (data) {
+		console.log(data)
+	alert("성공")
+	}
+	});
+	
+}
+
+</script>
+
+<title>문제 미리보기</title>
 </head>
 <body>
 <div class="box" >
 <div class="testlist_item">
- <table border="1" class="table">
- <tr>
-          <th>번호</th>
-          <th>문제유형</th>
-          <th>문제번호</th>
-          
-        </tr>
 
-  <tr>
-          <td>Ipsum</td>
-          <td>Dolor</td>
-          <td>Dolor</td>
-  </tr>
-</table>
+<tr>
+<td><a href="">${row.test_title}</a></td>
+</tr>
 </div>
 <div class="testlist_item" >
 
