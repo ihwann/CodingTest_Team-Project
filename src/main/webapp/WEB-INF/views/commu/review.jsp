@@ -8,10 +8,9 @@
 <meta charset="UTF-8">
 <title>Review</title>
 <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" type="text/css">
-
+<% int reviewNo=1; %>
 </head>
 <body>
-
 	<div>
 		<form style="display: inline; margin-left: 800px">
 			<select name="company" >
@@ -39,6 +38,7 @@
 	<table class="type09" style="margin-left: 40px">
     <thead>
     <tr>
+    	<th scope="cols" style="width:8%">번호</th>
         <th scope="cols" style="width:60%">제목 </th>
         <th scope="cols" style="width:20%">작성자 </th>
         <th scope="cols" style="width:20%">작성일 </th>
@@ -48,6 +48,7 @@
     
     <c:forEach items="${reviewList}" var="val">
     <tr>
+    	<td><%= reviewNo++ %>
     	<td><a href="showReview?id=${val.getReview_num()}"><c:out value = "${val.review_title}" /></a></td>
     	<td><c:out value = "${val.review_user}" /></td>
     	<td><c:out value = "${val.review_date}" /></td>
@@ -59,8 +60,8 @@
     </tbody>
 </table>
 <br>
-<input type="button" class="myButton" value="후기 작성" onClick="location='uploadAndModify.jsp'"
-	style="margin-left:1350px;">
+<input type="button" class="myButton" value="작성" onClick="location='uploadReview'"
+	style="margin-left:1400px;">
 	</div>
 	
 	

@@ -41,5 +41,19 @@ public class ReviewListService {
 		return reviewDao.select_review(id);
 	}
 	
+	public int insert_review(ReviewDto review) throws SQLException {
+		int result = 0;
+		String temp_id = "tempId";
+		review.setReview_user(temp_id);
+		
+		reviewDao = reviewSqlSession.getMapper(ReviewDao.class);
+		
+		result = reviewDao.insert_review(review);
+		
+		return result;
+		
+		
+	}
+	
 	
 }

@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.stevelee.java.dao.JobDao;
 import com.stevelee.java.dao.ReviewDao;
@@ -35,7 +38,7 @@ public class CommunityController {
 	
 	
 	//review list 화면 호출 
-	@RequestMapping(value = "/commu/review", method = RequestMethod.GET)
+	@RequestMapping(value = "review", method = RequestMethod.GET)
 	public String listReview(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		
 		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
@@ -65,8 +68,8 @@ public class CommunityController {
 //		return "commu/jobs.tiles";
 //	}
 	
-	@RequestMapping(value = "/commu/showReview", method = RequestMethod.GET)
-	public String uploadReview(Model model,
+	@RequestMapping(value = "showReview", method = RequestMethod.GET)
+	public String showReview(Model model,
 		     @RequestParam(value="id") int id) throws Exception {
 
 		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
@@ -77,13 +80,34 @@ public class CommunityController {
 		return "commu/showReview.tiles";
 	}
 	
-	@RequestMapping(value = "/commu/uploadReview", method = RequestMethod.GET)
-	public String uploadReview(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-		
-		
+	@RequestMapping(value = "uploadReview", method = RequestMethod.GET)
+	public String uploadReviewForm(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+		ArrayList<String> compList = dao.select_all_review_comp();
+		model.addAttribute("compList", compList);
 		
 		return "commu/uploadAndModifyReview.tiles";
 	}
+	
+	@RequestMapping(value = "uploadReview", method = RequestMethod.POST)
+	public String uploadReview(@ModelAttribute ReviewDto review, RedirectAttributes redirectAttribute) throws Exception {
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+
+		
+		redirectAttribute.addFlashAttribute("review", review);
+		
+		
+		String tempId = "tempId1";
+		review.setReview_user(tempId);
+		review.setReview_title(new String(review.getReview_title().getBytes("8859_1"), "UTF-8"));
+		review.setReview_comp(new String(review.getReview_comp().getBytes("8859_1"), "UTF-8"));
+		review.setReview_content(new String(review.getReview_content().getBytes("8859_1"), "UTF-8"));
+			
+		int res = dao.insert_review(review);
+		
+		return "redirect:review";
+	}
+	
 	
 //	@RequestMapping(value = "/commu/uploadJobs", method = RequestMethod.GET)
 //	public String uploadJobs(Locale locale, Model model) {
@@ -92,7 +116,7 @@ public class CommunityController {
 //		return "commu/uploadAndModifyJob.tiles";
 //	}
 //	
-	@RequestMapping(value = "/commu/modifyReview", method = RequestMethod.GET)
+	@RequestMapping(value = "modifyReview", method = RequestMethod.GET)
 	public String modifyReview(Model model,
 		     @RequestParam(value="id") int id) throws Exception {
 

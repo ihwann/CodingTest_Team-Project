@@ -80,19 +80,20 @@ select {
 		    font-weight: bold;
 		    color:gray;
 		    vertical-align: top;
+		    height:50px;
 		    border-bottom: 1px solid #ccc;
 		    background: #f3f6f7;
 		}
 		table.type09 td {
 		    width: 350px;
-		    height:40px;
+		    height:100px;
 		    padding: 10px;
 		    vertical-align: top;
 		    color:gray;
 		    font-size:17px;
 		    border-bottom: 1px solid #ccc;
 		}
-		/* .aType:link {text-decoration: none; color:gray;}
+		.aType:link {text-decoration: none; color:gray;}
 		.aType:visited {text-decoration: none; color: gray;}
 		.aType:active {text-decoration: none; color: gray;}
-		.aType:hover {text-decoration: underline; color: #ffffb3;} */
+		.aType:hover {text-decoration: underline; color: #ffffb3;}

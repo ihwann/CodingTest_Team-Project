@@ -6,7 +6,7 @@
 <mapper namespace="com.stevelee.java.dao.ReviewDao">
 	<select id="select_all_review" resultType="com.stevelee.java.dto.ReviewDto">
 		select * from tb_review
-		
+		order by review_date DESC
 	</select>
 	
 	<select id="select_all_review_comp" resultType="String">
@@ -16,6 +16,12 @@
 	<select id="select_review" resultType="com.stevelee.java.dto.ReviewDto" parameterType="int">
 		select * from tb_review where review_num=#{id}
 	</select>
+	
+	<insert id="insert_review" 
+		parameterType="com.stevelee.java.dto.ReviewDto">
+		insert into tb_review(review_user, review_date, review_title, review_comp,review_content) 
+		values(#{review_user}, NOW(), #{review_title}, #{review_comp}, #{review_content})	
+	</insert>
 	
 	
 	

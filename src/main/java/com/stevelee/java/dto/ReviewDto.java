@@ -72,6 +72,13 @@ public class ReviewDto {
 		public void setReview_content(String review_content) {
 			this.review_content = review_content;
 		}
+
+		@Override
+		public String toString() {
+			return "ReviewDto [review_num=" + review_num + ", review_user=" + review_user + ", review_date="
+					+ review_date + ", review_title=" + review_title + ", review_comp=" + review_comp
+					+ ", review_content=" + review_content + "]";
+		}
 		
 		
 		
