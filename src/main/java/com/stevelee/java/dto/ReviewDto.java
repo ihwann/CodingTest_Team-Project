@@ -3,7 +3,7 @@ package com.stevelee.java.dto;
 public class ReviewDto {
 
 	
-		int review_no;
+		int review_num;
 		String review_user;
 		String review_date;
 		String review_title;
@@ -14,10 +14,10 @@ public class ReviewDto {
 			
 		}
 
-		public ReviewDto(int review_no, String review_user, String review_date, String review_title, String review_comp,
+		public ReviewDto(int review_num, String review_user, String review_date, String review_title, String review_comp,
 				String review_content) {
 			super();
-			this.review_no = review_no;
+			this.review_num = review_num;
 			this.review_user = review_user;
 			this.review_date = review_date;
 			this.review_title = review_title;
@@ -25,12 +25,12 @@ public class ReviewDto {
 			this.review_content = review_content;
 		}
 
-		public int getReview_no() {
-			return review_no;
+		public int getReview_num() {
+			return review_num;
 		}
 
-		public void setReview_no(int review_no) {
-			this.review_no = review_no;
+		public void setReview_no(int review_num) {
+			this.review_num = review_num;
 		}
 
 		public String getReview_user() {

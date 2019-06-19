@@ -69,16 +69,16 @@ select {
 		    padding: 10px;
 		    font-weight: bold;
 		    vertical-align: top;
-		    color: white;
+		    color: gray;
 		    font-size: 19px;
 		    text-align:center;
-		    border-bottom: 3px solid white;
+		    border-bottom: 3px solid gray;
 		}
 		table.type09 tbody th {
 		    width: 150px;
 		    padding: 10px;
 		    font-weight: bold;
-		    color:white;
+		    color:gray;
 		    vertical-align: top;
 		    border-bottom: 1px solid #ccc;
 		    background: #f3f6f7;
@@ -88,11 +88,11 @@ select {
 		    height:40px;
 		    padding: 10px;
 		    vertical-align: top;
-		    color:white;
+		    color:gray;
 		    font-size:17px;
 		    border-bottom: 1px solid #ccc;
 		}
-		.aType:link {text-decoration: none; color:white;}
-		.aType:visited {text-decoration: none; color: white;}
-		.aType:active {text-decoration: none; color: white;}
-		.aType:hover {text-decoration: underline; color: #ffffb3;}
+		/* .aType:link {text-decoration: none; color:gray;}
+		.aType:visited {text-decoration: none; color: gray;}
+		.aType:active {text-decoration: none; color: gray;}
+		.aType:hover {text-decoration: underline; color: #ffffb3;} */

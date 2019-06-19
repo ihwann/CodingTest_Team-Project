@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.stevelee.java.dto.ReviewDto"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -13,30 +12,16 @@
 </head>
 <body>
 
-<%
-	ArrayList<ReviewDto> reviews = (ArrayList<ReviewDto>)request.getAttribute("reviewList");
-	
-	
-	/* 
-	for(int i = 0; i < reviews.size(); i++) {
-		System.out.println(reviews.get(i).getReview_title());
-		
-	} */
-	
-
-%>
 	<div>
 		<form style="display: inline; margin-left: 800px">
 			<select name="company" >
-				<%-- <c:forEach var="code" items="${ }" --%>
 				<option value="">--회사 선택-- </option>
-				<option value="ss">삼성</option>
-				<option value="sk">SK</option>
-				<option value="lg">LG</option>
-				<option value="hh">한화</option>
-				<option value="lt">롯데</option>
-				<option value="kt">KT</option>
-				<option value="etc">기타 </option> 
+				<c:forEach items="${compList}" var="val">
+				<option value="${val}">
+				 <c:out value = "${val}" />
+				</option>
+				</c:forEach>
+				
 			</select>       
 			&nbsp; &nbsp;&nbsp; 
 			<input class="keyword"type="text" placeholder="Search..">
@@ -54,30 +39,30 @@
 	<table class="type09" style="margin-left: 40px">
     <thead>
     <tr>
-        <th scope="cols" style="width:50%">제목 </th>
-        <th scope="cols" style="width:25%">작성자 </th>
-        <th scope="cols" style="width:25%">작성일 </th>
+        <th scope="cols" style="width:60%">제목 </th>
+        <th scope="cols" style="width:20%">작성자 </th>
+        <th scope="cols" style="width:20%">작성일 </th>
     </tr>
     </thead>
     <tbody>
+    
+    <c:forEach items="${reviewList}" var="val">
     <tr>
-        <td><a class="aType" href="">내용이 들어갑니다.</a></td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-
+    	<td><a href="showReview?id=${val.getReview_num()}"><c:out value = "${val.review_title}" /></a></td>
+    	<td><c:out value = "${val.review_user}" /></td>
+    	<td><c:out value = "${val.review_date}" /></td>
     </tr>
-    <tr>
-        <td><a class="aType" href="">내용이 들어갑니다.</a></td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-    </tr>
-    <tr>
-        <td><a class="aType" href="">내용이 들어갑니다.</a></td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-    </tr>
+    </c:forEach>
+    
+    	
+  
     </tbody>
 </table>
+<br>
+<input type="button" class="myButton" value="후기 작성" onClick="location='uploadAndModify.jsp'"
+	style="margin-left:1350px;">
 	</div>
+	
+	
 </body>
 </html>

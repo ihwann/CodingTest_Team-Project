@@ -13,6 +13,11 @@
 		select distinct review_comp from tb_review
 	</select>
 	
+	<select id="select_review" resultType="com.stevelee.java.dto.ReviewDto" parameterType="int">
+		select * from tb_review where review_num=#{id}
+	</select>
+	
+	
 	
 	
 </mapper>

@@ -34,5 +34,12 @@ public class ReviewListService {
 	}
 	
 	
+	public ReviewDto select_review(int id) throws SQLException{
+		
+		reviewDao = reviewSqlSession.getMapper(ReviewDao.class);
+		
+		return reviewDao.select_review(id);
+	}
+	
 	
 }

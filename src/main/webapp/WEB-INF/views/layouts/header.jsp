@@ -16,7 +16,7 @@
 				<li class="mainMenu"><a class="menu_a" href="/introduce">교육소개</a></li>
 				<li class="dropdown mainMenu"><a class="menu_a" href="">커뮤니티</a>
 					<ul class="subMenu">
-						<li><a class="menu_a" href="/review">기업코딩테스트 후기</a></li>
+						<li><a class="menu_a" href="review">기업코딩테스트 후기</a></li>
 						<li><a class="menu_a" href="/jobs">구인공고</a></li>
 					</ul>
 				</li>

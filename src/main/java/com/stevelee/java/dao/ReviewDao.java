@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import com.stevelee.java.dto.ReviewDto;
 
 public interface ReviewDao {
-	ArrayList<ReviewDto> select_all_review() throws SQLException, Exception; //전체 review 가져와 화면에 뿌리기
-	ArrayList<String> select_all_review_comp() throws SQLException, Exception; //회사 이름 다 가져오기(셀렉트박스)  
-	
+	ArrayList<ReviewDto> select_all_review() throws SQLException; //전체 review 가져와 화면에 뿌리기
+	ArrayList<String> select_all_review_comp() throws SQLException; //회사 이름 다 가져오기(셀렉트박스)  
+	ReviewDto select_review(int id) throws SQLException;// 특정 리뷰 가져오기 
 	
 }
