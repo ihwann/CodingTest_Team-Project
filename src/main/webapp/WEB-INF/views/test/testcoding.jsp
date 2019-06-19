@@ -14,45 +14,25 @@
 <body>
 
 <div class="testcoding">
-	
-	
-		
+
 	<!-- 문제유형 & 문제타입 -->
 	<div class="testcoding_header">
 		<h1 class="testName">문제유형 _ ${map.cate }</h1>
 	</div>
 	
+	
+	
+	
+	
 	<!-- 문제지도 -->
 	<div class="testcoding_map">
-		<div class="map">
-			<span>정렬문제</span>
-			<div class="map_overlay">
-				<i class="fas fa-lock"></i>
+		<c:forEach items="${testList }" var="item" >
+			<div class="map" onclick="example(${item })">
+				<span>${item }번</span>
 			</div>
-		</div>
-		
-		<div class="map_arrow">
-			<i class="fas fa-chevron-right"></i>
-		</div>
-		
-		<div class="map">
-			<span>정렬문제</span>
-			<div class="map_overlay">
-				<i class="fas fa-lock"></i>
-			</div>
-		</div>
-		
-		<div class="map_arrow">
-			<i class="fas fa-chevron-right"></i>
-		</div>
-		
-		<div class="map">
-			<span>정렬문제</span>
-			<div class="map_overlay">
-				<i class="fas fa-lock"></i>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
+	
 	
 	
 	
@@ -120,10 +100,11 @@ ${map.sentence_outputex }
 			<div class="testcoding_mian_left_title">
 				<h1 class="testName3">코딩결과 출력</h1>
 				<label><span>${map.sentence_title }</span>문제 과거기록 조회</label>
-				<select>
-					<option value="">2019년 통과</option>
-					<option value="">2019년 임시저장</option>
-					<option value="">2019년 통과</option>
+				<select id="select_his">
+						<option value="0">문제풀기 모드</option>
+					<c:forEach items="${history }" var="item" >
+						<option value="${item.test_result_seq }">${item.test_result } - ${item.test_result_regi }</option>
+					</c:forEach>
 				</select>
 			</div>	
 			<div class="testcoding_mian_left_detail">
@@ -188,6 +169,12 @@ ${map.sentence_outputex }
 
 
 <script>
+
+	// 전역변수 선언
+	var currentCode;
+	var check = 0;
+	
+	
 	
 	// ace edtior 세팅
 	var editor = ace.edit("editor");
@@ -199,7 +186,6 @@ ${map.sentence_outputex }
 	// 정답제출
 	function submit() {
 		
-		alert("실행11");
 		var code = editor.getValue();
 		var timer = $(".timer").val();
 		var codeLength = $(".codeLength").val();
@@ -222,8 +208,56 @@ ${map.sentence_outputex }
 	        }
 	    })
 	}
-	
 
+
+
+	// 과거이력조회
+ 	$("#select_his").change(function() {	
+		var num = $("#select_his option:selected").val();
+
+		var currentTime = $(".timer").val();
+			
+		if(num == 0) { // 과거이력 조회 -> 문제풀기모드
+			editor.setValue(currentCode);
+			$(".timer").val(currentTime);
+        	$(".codeLength").val("대기중");
+        	$(".memory").val("대기중");
+        	$(".runningTime").val("대기중");
+        	$(".result").val("대기중");
+        	currentCode = editor.getValue();
+        	editor.setReadOnly(false);
+        	startTimer();
+        	check = check - 1;
+		} else {
+			
+			if(check == 0) {
+				currentCode = editor.getValue();
+				check = check + 1;
+			}
+			
+			$.ajax({ // 문제풀기모드 -> 과거이력 조회
+		        url: 'gethistory',
+		        type: 'post',
+		        data: { "num" : num},
+		        success: function(data){
+		        	$(".timer").val(data.test_result_time);
+		        	$(".codeLength").val(data.test_result_codeLength);
+		        	$(".memory").val(data.test_result_useMemory);
+		        	$(".runningTime").val(data.test_result_runingTime);
+		        	$(".result").val(data.test_result);
+		        	
+		        	editor.setValue(data.test_result_code);
+		        	editor.setReadOnly(true);
+		        	stopTimer();
+		        },
+				error:function(request,status,error){
+		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        }
+		    })
+		}
+	})
+
+	
 	
 	// 코드길이 측정
 	editor.session.on('change', function(delta) {
@@ -236,13 +270,20 @@ ${map.sentence_outputex }
 	
 	// 타이머
 	var time = 0;
+	var timerMethod;
 	
 	function timer() {
 		time = time + 1;
 		$(".timer").val(time);		
 	}
+	
+	function startTimer() {
+		timerMethod = setInterval(timer, 1000);
+	}
 
-	setInterval(timer, 1000);				
+	function stopTimer() {
+		clearInterval(timerMethod);
+	}			
 
 
 </script>

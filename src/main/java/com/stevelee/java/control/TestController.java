@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -36,29 +37,38 @@ public class TestController {
 	
     
     
-    // 문제유형 선택 후 내가 도전할 단계의 문제작성화면 호출
+    
+    
+    // 문제유형 선택 후 문제풀기 첫 화면
 	@RequestMapping(value = "/testcoding", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
+        TestDao testDao = sqlSession.getMapper(TestDao.class);
+		
 		// 로그인되어 있는 아이디 , 내가 선택한 문제 타입세팅
 		TestDto dto = new TestDto();
-		dto.setResult_user("steavelee");
+		dto.setTest_result_user("steavelee");
 		dto.setCate("samsung");
-				
+
+		// 선택한 문제유형에서 내가풀어야 할 단계의 문제정보를 획득
 		Map<String, String> map = new HashMap<String, String>();
-		
-		// 선택한 유형의 문제에서 내가 마지막으로 pass한 다음번째 문제의 정보 획득
-		// 만약 해당유형이 처음이거나 통과했던 문제가 없다면 첫번째 단계의 문제정보 획득
-        TestDao testDao = sqlSession.getMapper(TestDao.class);
         List<GetTestDto> list = testDao.select_test(dto);
-        
-        // 획득한 dto를 model에 태워 프론트에 전달하기 위해 map형태로 변환
         for(int i = 0; i<list.size(); i++) {
         	map.put(list.get(i).getSent_type(), list.get(i).getSent_cont());
         }
 		
+        // 과거이력정보 획득
+        dto.setTest_result_no(list.get(0).getTest_no());
+        List<TestDto> list2 = testDao.get_test_his(dto);
+        
+        // 선택한 문제유형의 전체 문제 리스트 획득
+        List<Integer> testList = new ArrayList<Integer>();
+        testList = testDao.select_test_list(dto.getCate());
+   
         map.put("cate", dto.getCate());
         model.addAttribute("map", map);
+        model.addAttribute("history", list2);
+        model.addAttribute("testList", testList);
         
 		
 		return "test/testcoding.tiles";
@@ -68,7 +78,7 @@ public class TestController {
 	
 	
 	
-	// 문제작성 완료 후 문제 제출시 결과확인 및 결과 저장
+	// 문제제출
 	@ResponseBody
 	@RequestMapping(value = "/insertTest", method = RequestMethod.POST)
 	public Map<String, Object> insertProblem(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -137,16 +147,16 @@ public class TestController {
         long[] methodResult = (long[])objMethod.invoke(obj);
 
         // 결과값 dto세팅
-        dto.setResult_no(32);
-        dto.setResult_user(id);
-        dto.setResult_code(body);
-        dto.setResult("pass");
-        dto.setResult_time(timer);
-        dto.setResult_useMemory(300);
-        dto.setResult_runingTime(20);
-        dto.setResult_count(11);
-        dto.setResult_error(1);
-        dto.setResult_codeLength(codeLength);
+        dto.setTest_result_no(32);
+        dto.setTest_result_user(id);
+        dto.setTest_result_code(body);
+        dto.setTest_result("pass");
+        dto.setTest_result_time(timer);
+        dto.setTest_result_useMemory(300);
+        dto.setTest_result_runingTime(20);
+        dto.setTest_result_count(11);
+        dto.setTest_result_error(1);
+        dto.setTest_result_codeLength(codeLength);
         
         // 세팅된 dto를 db에 입력
         TestDao testDao = sqlSession.getMapper(TestDao.class);
@@ -187,14 +197,33 @@ public class TestController {
 		int codeLength = Integer.parseInt((String)request.getParameter("codeLength"));
 		
         // 임시저장 값 dto세팅
-        dto.setResult_no(32);
-        dto.setResult_user(id);
-        dto.setResult_code(body);
-        dto.setResult("save");
-        dto.setResult_count(11);
-        dto.setResult_codeLength(codeLength);
+        dto.setTest_result_no(32);
+        dto.setTest_result_user(id);
+        dto.setTest_result_code(body);
+        dto.setTest_result("save");
+        dto.setTest_result_count(11);
+        dto.setTest_result_codeLength(codeLength);
 		
 		return "test/testcoding.tiles";
+	}
+	
+	
+	
+	
+	
+    // 과거이력 상세조회
+	@ResponseBody
+	@RequestMapping(value = "/gethistory", method = RequestMethod.POST)
+	public TestDto getHistory(Locale locale, Model model, HttpServletRequest request) {
+		
+		String num = (String)request.getParameter("num");
+		
+		TestDto dto = new TestDto();
+		int seq = Integer.parseInt(num);
+		TestDao testDao = sqlSession.getMapper(TestDao.class);
+        dto = testDao.select_his(seq);
+        
+        return dto;
 	}
 }
 

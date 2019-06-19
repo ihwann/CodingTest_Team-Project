@@ -90,6 +90,11 @@
 	font-size: 12px;
 	margin-right: 25px;
 	margin-top: 20px;
+    cursor: pointer;
+}
+
+.header_logo {
+	cursor: pointer;
 }
 
 a {

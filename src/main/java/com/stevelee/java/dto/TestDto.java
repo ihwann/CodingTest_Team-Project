@@ -2,145 +2,146 @@ package com.stevelee.java.dto;
 
 public class TestDto {
 	
-	private int seq;
-	private int result_no;
-	private String result_user;
-	private String result_code;
-	private String result;
-	private int result_time;
-	private int result_useMemory;
-	private int result_runingTime;
-	private int result_count;
-	private int result_error;
-	private int result_codeLength;
-	private char result_del;
-	private String result_regi;
+	private int test_result_seq;
+	private int test_result_no;
+	private String test_result_user;
+	private String test_result_code;
+	private String test_result;
+	private int test_result_time;
+	private int test_result_useMemory;
+	private int test_result_runingTime;
+	private int test_result_count;
+	private int test_result_error;
+	private int test_result_codeLength;
+	private char test_result_del;
+	private String test_result_regi;
 	private String cate;
 	
 	public TestDto(){}
 
-	public TestDto(int seq, int result_no, String result_user, String result_code, String result, int result_time,
-			int result_useMemory, int result_runingTime, int result_count, int result_error, int result_codeLength,
-			char result_del, String result_regi, String cate) {
+	public TestDto(int test_result_seq, int test_result_no, String test_result_user, String test_result_code,
+			String test_result, int test_result_time, int test_result_useMemory, int test_result_runingTime,
+			int test_result_count, int test_result_error, int test_result_codeLength, char test_result_del,
+			String test_result_regi, String cate) {
 		super();
-		this.seq = seq;
-		this.result_no = result_no;
-		this.result_user = result_user;
-		this.result_code = result_code;
-		this.result = result;
-		this.result_time = result_time;
-		this.result_useMemory = result_useMemory;
-		this.result_runingTime = result_runingTime;
-		this.result_count = result_count;
-		this.result_error = result_error;
-		this.result_codeLength = result_codeLength;
-		this.result_del = result_del;
-		this.result_regi = result_regi;
+		this.test_result_seq = test_result_seq;
+		this.test_result_no = test_result_no;
+		this.test_result_user = test_result_user;
+		this.test_result_code = test_result_code;
+		this.test_result = test_result;
+		this.test_result_time = test_result_time;
+		this.test_result_useMemory = test_result_useMemory;
+		this.test_result_runingTime = test_result_runingTime;
+		this.test_result_count = test_result_count;
+		this.test_result_error = test_result_error;
+		this.test_result_codeLength = test_result_codeLength;
+		this.test_result_del = test_result_del;
+		this.test_result_regi = test_result_regi;
 		this.cate = cate;
 	}
 
-	public int getSeq() {
-		return seq;
+	public int getTest_result_seq() {
+		return test_result_seq;
 	}
 
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setTest_result_seq(int test_result_seq) {
+		this.test_result_seq = test_result_seq;
 	}
 
-	public int getResult_no() {
-		return result_no;
+	public int getTest_result_no() {
+		return test_result_no;
 	}
 
-	public void setResult_no(int result_no) {
-		this.result_no = result_no;
+	public void setTest_result_no(int test_result_no) {
+		this.test_result_no = test_result_no;
 	}
 
-	public String getResult_user() {
-		return result_user;
+	public String getTest_result_user() {
+		return test_result_user;
 	}
 
-	public void setResult_user(String result_user) {
-		this.result_user = result_user;
+	public void setTest_result_user(String test_result_user) {
+		this.test_result_user = test_result_user;
 	}
 
-	public String getResult_code() {
-		return result_code;
+	public String getTest_result_code() {
+		return test_result_code;
 	}
 
-	public void setResult_code(String result_code) {
-		this.result_code = result_code;
+	public void setTest_result_code(String test_result_code) {
+		this.test_result_code = test_result_code;
 	}
 
-	public String getResult() {
-		return result;
+	public String getTest_result() {
+		return test_result;
 	}
 
-	public void setResult(String result) {
-		this.result = result;
+	public void setTest_result(String test_result) {
+		this.test_result = test_result;
 	}
 
-	public int getResult_time() {
-		return result_time;
+	public int getTest_result_time() {
+		return test_result_time;
 	}
 
-	public void setResult_time(int result_time) {
-		this.result_time = result_time;
+	public void setTest_result_time(int test_result_time) {
+		this.test_result_time = test_result_time;
 	}
 
-	public int getResult_useMemory() {
-		return result_useMemory;
+	public int getTest_result_useMemory() {
+		return test_result_useMemory;
 	}
 
-	public void setResult_useMemory(int result_useMemory) {
-		this.result_useMemory = result_useMemory;
+	public void setTest_result_useMemory(int test_result_useMemory) {
+		this.test_result_useMemory = test_result_useMemory;
 	}
 
-	public int getResult_runingTime() {
-		return result_runingTime;
+	public int getTest_result_runingTime() {
+		return test_result_runingTime;
 	}
 
-	public void setResult_runingTime(int result_runingTime) {
-		this.result_runingTime = result_runingTime;
+	public void setTest_result_runingTime(int test_result_runingTime) {
+		this.test_result_runingTime = test_result_runingTime;
 	}
 
-	public int getResult_count() {
-		return result_count;
+	public int getTest_result_count() {
+		return test_result_count;
 	}
 
-	public void setResult_count(int result_count) {
-		this.result_count = result_count;
+	public void setTest_result_count(int test_result_count) {
+		this.test_result_count = test_result_count;
 	}
 
-	public int getResult_error() {
-		return result_error;
+	public int getTest_result_error() {
+		return test_result_error;
 	}
 
-	public void setResult_error(int result_error) {
-		this.result_error = result_error;
+	public void setTest_result_error(int test_result_error) {
+		this.test_result_error = test_result_error;
 	}
 
-	public int getResult_codeLength() {
-		return result_codeLength;
+	public int getTest_result_codeLength() {
+		return test_result_codeLength;
 	}
 
-	public void setResult_codeLength(int result_codeLength) {
-		this.result_codeLength = result_codeLength;
+	public void setTest_result_codeLength(int test_result_codeLength) {
+		this.test_result_codeLength = test_result_codeLength;
 	}
 
-	public char getResult_del() {
-		return result_del;
+	public char getTest_result_del() {
+		return test_result_del;
 	}
 
-	public void setResult_del(char result_del) {
-		this.result_del = result_del;
+	public void setTest_result_del(char test_result_del) {
+		this.test_result_del = test_result_del;
 	}
 
-	public String getResult_regi() {
-		return result_regi;
+	public String getTest_result_regi() {
+		return test_result_regi;
 	}
 
-	public void setResult_regi(String result_regi) {
-		this.result_regi = result_regi;
+	public void setTest_result_regi(String test_result_regi) {
+		this.test_result_regi = test_result_regi;
 	}
 
 	public String getCate() {
@@ -149,6 +150,17 @@ public class TestDto {
 
 	public void setCate(String cate) {
 		this.cate = cate;
+	}
+
+	@Override
+	public String toString() {
+		return "TestDto [test_result_seq=" + test_result_seq + ", test_result_no=" + test_result_no
+				+ ", test_result_user=" + test_result_user + ", test_result_code=" + test_result_code + ", test_result="
+				+ test_result + ", test_result_time=" + test_result_time + ", test_result_useMemory="
+				+ test_result_useMemory + ", test_result_runingTime=" + test_result_runingTime + ", test_result_count="
+				+ test_result_count + ", test_result_error=" + test_result_error + ", test_result_codeLength="
+				+ test_result_codeLength + ", test_result_del=" + test_result_del + ", test_result_regi="
+				+ test_result_regi + ", cate=" + cate + "]";
 	}
 
 }

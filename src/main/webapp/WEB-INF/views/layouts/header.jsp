@@ -5,11 +5,11 @@
 <div class="headerMain">
 
 	<div class="headerMain_left">
-		<img src="resources/images/top_logo.png">
+		<img class="header_logo" src="resources/images/top_logo.png">
 	</div>
 
 	<div class="headerMain_right">
-		<div class="headerMain_right_top"><span class="login_menu">로그인  | 로그아웃</span></div>
+		<div class="headerMain_right_top"><span class="login_menu">로그인 </span><span class="login_menu">|</span><span class="login_menu regi">회원가입</span></div>
 		<div class="headerMain_right_bottom">
 			<ul>
 				<li class="mainMenu"><a class="menu_a" href="/">메인화면</a></li>
@@ -27,3 +27,16 @@
 		</div>	
 	</div>
 </div>
+
+
+<script>
+
+$(".regi").click(function(){
+	window.location = "TermsConditions";
+});
+
+$(".header_logo").click(function(){
+	window.location = "/java";
+});
+
+</script>

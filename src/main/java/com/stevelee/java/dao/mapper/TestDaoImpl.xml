@@ -12,6 +12,10 @@
 		SELECT *
 		FROM tb_testmake_contents
 		WHERE test_no = 
+		<if test = "test_result_no != 0">
+			#{test_result_no}
+		</if>
+		<if test = "test_result_no == null or test_result_no == '' ">
 			(
 				SELECT MIN(test_no)
 				FROM tb_testmake_title 
@@ -21,7 +25,7 @@
 						SELECT NVL(MAX(test_result_no), 0)
 						FROM tb_test_result
 						WHERE test_result = "pass"
-						AND test_result_user = #{result_user}
+						AND test_result_user = #{test_result_user}
 						AND test_result_no IN 
 							(
 								SELECT test_no
@@ -30,6 +34,40 @@
 							)
 					)
 			)
+		</if>
+		<!-- 
+		SELECT *
+		FROM tb_testmake_contents
+		WHERE test_no = 
+		<if test = "test_result_no != null">#{test_result_no}</if>
+		<if test = "test_result_no == null">
+			(
+				SELECT MIN(test_no)
+				FROM tb_testmake_title 
+				WHERE test_cate = #{cate}
+				AND test_no > 
+					(
+						SELECT NVL(MAX(test_result_no), 0)
+						FROM tb_test_result
+						WHERE test_result = "pass"
+						AND test_result_user = #{test_result_user}
+						AND test_result_no IN 
+							(
+								SELECT test_no
+								FROM tb_testmake_title
+								WHERE test_cate = #{cate}
+							)
+					)
+			)
+		</if>
+		 -->
+	</select>
+	
+	
+	
+	<!-- 해당유형 전체 문제 리스트 정보 확인 -->	
+	<select id="select_test_list" resultType="Integer" parameterType="String">
+		SELECT * FROM tb_testmake_title WHERE test_cate = #{cate}
 	</select>
 	
 	
@@ -83,5 +121,25 @@
 		#{result_count},
 		#{result_codeLength})
 	</insert>
+	
+	
+	
+	<!-- 해당문제의 과거 이력 리스트 -->	
+	<select id="get_test_his" resultType="com.stevelee.java.dto.TestDto" parameterType="com.stevelee.java.dto.TestDto">
+		SELECT * FROM tb_test_result
+		WHERE test_result_no = #{test_result_no}
+		AND test_result_del = 'N'
+		AND test_result_user = #{test_result_user}
+		ORDER BY test_result_regi DESC
+	</select>
+	
+	
+	
+	<!-- 선택한 과거 이력 상세조회 -->	
+	<select id="select_his" resultType="com.stevelee.java.dto.TestDto" parameterType="int">
+		SELECT * FROM tb_test_result
+		WHERE test_result_seq = #{seq}
+	</select>
+	
 
 </mapper>
