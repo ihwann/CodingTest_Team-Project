@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<font size="20" color="white">회원가입성공</font>
+<font size="20" color="black">회원가입성공</font>
 </body>
 </html>

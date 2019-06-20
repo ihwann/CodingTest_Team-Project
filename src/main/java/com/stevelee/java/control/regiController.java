@@ -31,13 +31,13 @@ public class regiController {
 
 	@Autowired
 	private regi_UserService regi_service;
-	
+
 	@Autowired
 	private regi_randomNum randomNum_service;
-	
+
 	@Autowired
 	private regi_sendEmailService sendEmailService;
-	
+
 	// 회원가입 화면 RequestMapping
 	@RequestMapping(value = "/regi", method = RequestMethod.POST)
 	public String regi(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -72,43 +72,43 @@ public class regiController {
 		System.out.println("이메일 중복체크메서드");
 		return regi_service.userEmailChk(user_eMail);
 	}
-	
+
 	// 이메일 인증 컨트롤러
 	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public String sendEmail(@RequestParam("user_eMail") String user_eMail, HttpServletRequest request) throws Exception {
+	public String sendEmail(@RequestParam("user_eMail") String user_eMail, HttpServletRequest request)
+			throws Exception {
 		String email_addr = user_eMail;
-		String authNum="";
+		String authNum = "";
 		// 난수 생성
 		authNum = randomNum_service.create_randomNum();
-		
-		//System.out.println(email_addr + " 이메일 인증");
-		//System.out.println(authNum);
-		
+
+		// System.out.println(email_addr + " 이메일 인증");
+		// System.out.println(authNum);
+
 		// 생성된 난수와 전송한 메일을 세션에 담기
 		session = request.getSession();
 		session.setAttribute("authNum", authNum);
 		session.setAttribute("email_addr", email_addr);
-		
+
+		StringBuffer resultAuth = new StringBuffer();
+
 		String authKey = (String) request.getSession().getAttribute("authNum");
 		String authEmail = (String) request.getSession().getAttribute("email_addr");
 		String sessionID = session.getId();
-		
+
 		// 난수값+이메일+세션ID 합치기
-		String resultAuth = authKey+authEmail+sessionID;
+		resultAuth.append(authKey);
+		resultAuth.append(sessionID);
+		resultAuth.append(authEmail);
 		System.out.println(resultAuth);
-		
+
 		// 생성한 난수를 이메일로 보내기
 		sendEmailService.send_Email(email_addr, authNum);
-		
-		return "/authchk?resultAuth=" + resultAuth;
+
+		return resultAuth.toString();
 	}
-	// 아직 미구현
-	@RequestMapping(value="/authchk", method = RequestMethod.POST)
-	public void authchk(@RequestParam("resultAuth") String resultAuth) {
-		System.out.println("authchk 넘기기 성공" + resultAuth);
-	}
-	
+
 	// 닉네임 중복체크 컨트롤러
 	@RequestMapping(value = "/nickchk", method = RequestMethod.POST)
 	@ResponseBody // 필요한 이유 파악
@@ -121,9 +121,8 @@ public class regiController {
 	// 회원가입 완료 화면 매핑
 	@RequestMapping(value = "/regi_success", method = RequestMethod.GET)
 	public String regi_success(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		return "user/regi_success.tiles"; //
 
+		return "user/regi_success.tiles"; //
 	}
 
 }

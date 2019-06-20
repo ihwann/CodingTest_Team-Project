@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>스티브리자바 이용약관 안내</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-1.11.3.min.js"></script>
@@ -13,7 +13,7 @@
 
 	function CheckForm(Join) {
 
-		//체크박스 체크여부 확인 [하나]
+		//체크박스 체크여부 확인
 		var chk1 = document.termsOK.termsAgree.checked;
 
 		if (!chk1) {
@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="terms-content">
 				<h4 align="center">
-					<font color="black">STEVELEEJAVA 이용약관 동의</font>
+					<font color="black">STEVELEEJAVA 이용약관 안내</font>
 				</h4>
 				<div
 					style="margin:auto; display: flex; justify-content: center; width: 50%; overflow: scroll; height: 200px; padding: 30px; background-color: white; border: 1px; solid: #ccc">
