@@ -31,7 +31,7 @@ $(document).ready(function() {
         if (!(user_eMail.match(emailExp))) {
             $("#email_check").text("올바른 이메일 형식이 아닙니다.");
             $("#email_check").css("color", "red");
-            $("#btn_test").attr("disabled", true);
+            $("#btn_sendAuth").attr("disabled", true);
             regi_formArr[0] = false;
         } else {
 
@@ -44,7 +44,7 @@ $(document).ready(function() {
                     if (data >= 1) {
                         $("#email_check").text("사용 중인 이메일입니다.");
                         $("#email_check").css("color", "red");
-                        $("#btn_test").attr("disabled", true);
+                        $("#btn_sendAuth").attr("disabled", true);
                         regi_formArr[0] = false;
 
                     } else {
