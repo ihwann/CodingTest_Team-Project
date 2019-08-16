@@ -17,6 +17,7 @@ import com.stevelee.java.dto.regi_UserDto;
 import com.stevelee.java.service.regi_UserService;
 import com.stevelee.java.service.regi_randomNum;
 import com.stevelee.java.service.regi_sendEmailService;
+import com.stevelee.java.service.regi_userConvertSHA256Service;
 
 /**
  * Handles requests for the application home page.
@@ -38,9 +39,12 @@ public class regiController {
 	@Autowired
 	private regi_sendEmailService sendEmailService;
 
+	@Autowired
+	private regi_userConvertSHA256Service convert_SHA256;
+
 	// 회원가입 화면 RequestMapping
 	@RequestMapping(value = "/regi", method = RequestMethod.POST)
-	public String regi(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String regi() throws Exception {
 		System.out.println("회원가입화면");
 
 		return "user/regi.tiles"; //
@@ -49,7 +53,7 @@ public class regiController {
 
 	// 이용약관 화면 RequestMapping
 	@RequestMapping(value = "/TermsConditions", method = RequestMethod.GET)
-	public String TermsConditions(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String TermsConditions() throws Exception {
 
 		return "user/TermsConditions.tiles"; //
 
@@ -57,10 +61,16 @@ public class regiController {
 
 	// 회원가입 컨트롤러
 	@RequestMapping(value = "/regiControl", method = RequestMethod.POST)
-	public String regiControl(regi_UserDto udto, ServletRequest request) throws Exception {
+	public String regiControl(regi_UserDto udto) throws Exception {
 		// 회원가입 메서드
 		System.out.println("회원가입메서드");
+
+		// 비밀번호 SHA256 변환
+		String user_pwSHA256 = convert_SHA256.encrypt(udto.getUser_pw());
+		System.out.println(user_pwSHA256);
+		udto.setUser_pw(user_pwSHA256);
 		regi_service.userRegiService(udto);
+
 		return "user/regi_success.tiles";
 	}
 
@@ -83,21 +93,17 @@ public class regiController {
 		// 난수 생성
 		authNum = randomNum_service.create_randomNum();
 
-		// System.out.println(email_addr + " 이메일 인증");
-		// System.out.println(authNum);
-
 		// 생성된 난수와 전송한 메일을 세션에 담기
 		session = request.getSession();
 		session.setAttribute("authNum", authNum);
 		session.setAttribute("email_addr", email_addr);
-
-		StringBuffer resultAuth = new StringBuffer();
 
 		String authKey = (String) request.getSession().getAttribute("authNum");
 		String authEmail = (String) request.getSession().getAttribute("email_addr");
 		String sessionID = session.getId();
 
 		// 난수값+이메일+세션ID 합치기
+		StringBuffer resultAuth = new StringBuffer();
 		resultAuth.append(authKey);
 		resultAuth.append(sessionID);
 		resultAuth.append(authEmail);
@@ -120,7 +126,7 @@ public class regiController {
 
 	// 회원가입 완료 화면 매핑
 	@RequestMapping(value = "/regi_success", method = RequestMethod.GET)
-	public String regi_success(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String regi_success() throws Exception {
 
 		return "user/regi_success.tiles"; //
 	}

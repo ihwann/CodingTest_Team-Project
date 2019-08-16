@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +14,16 @@
 
 <title>Jobs</title>
 
+
 <script>
 
-    // html dom 이 다 로딩된 후 실행된다.
+
     $(document).ready(function(){
+    	
+    	var rtn = '${rtn}';
+    	if(rtn == 1) {
+    		alert('게시글 삭제 완료 되었습니다.');
+    	}
         
         $(".menu>div>button").click(function(){
             var submenu = $(this).next("div");
@@ -25,50 +35,96 @@
             }
         });
     });
+    
+    function search() {
+    	
+    	var lang_items = [];
+    	$('input:checkbox[name=main_lang_sel]:checked').each(function () {
+    		lang_items.push($(this).val());
+    	});
+    	
+    	var field_items = [];
+    	$('input:checkbox[name=field_sel]:checked').each(function () {
+    		field_items.push($(this).val());
+    	});
+    	
+    	var loc_items = [];
+    	$('input:checkbox[name=loc_sel]:checked').each(function () {
+    		loc_items.push($(this).val());
+    	});
+    	
+    	var smsi_items = [];
+    	$('input:checkbox[name=smsi_sel]:checked').each(function () {
+    		smsi_items.push($(this).val());
+    	});
+   
+    	var dataArray = new Array();
+    	dataArray.push(JSON.stringify(lang_items));
+    	dataArray.push(JSON.stringify(field_items));
+    	dataArray.push(JSON.stringify(loc_items));
+    	dataArray.push(JSON.stringify(smsi_items));
+    
+    	
+    	
+    	$.ajax({
+    		type : "post",
+    		url : 'searchJobKeywordAjax',
+    		dataType: "json",
+    		contentType: "application/json; charset=utf-8;",
+    		data: JSON.stringify(dataArray),
+    		success : function (data) {
+    			$('#selectedtable').empty();
+    			alert(data);
+   
+    		}
+    		});
+    	
+    }
 </script>
 </head>
 <body>
 
+
+<div style="width:70%;margin-left: 60px;">
 <div>
     
         <div class="menu">
-			<div style="margin-left:900px">
-            <button class="myButton" style="height:40px;width:450px" >조건 검색 열기 </button>&nbsp;&nbsp;&nbsp;
+			<div style="margin-left:1000px;width:800px">
+            <button class="myButton" style="height:40px;width:250px" >조건 검색 열기 </button>&nbsp;&nbsp;&nbsp;
             
             <div class="hide" >
                 <form>
-                <div class="choice_box">
+                <div id="choice_box">
                 <br>
-             	언어 
-                	<input type="checkbox" name="main_lang_sel" value="java"/>자바 
-                	<input type="checkbox" name="main_lang_sel" value="ckind"/>c계열  
-                	<input type="checkbox" name="main_lang_sel" value="asp"/>ASP
-                	<input type="checkbox" name="main_lang_sel" value="py"/>파이썬 
-                	<input type="checkbox" name="main_lang_sel" value="etc"/>기타
+             	언어 &nbsp;&nbsp;
+             		<c:forEach items="${job_main_lang_list}" var="val">
+             			<input type="checkbox" name="main_lang_sel" value="${val}"/><c:out value = "${val}" />
+             		</c:forEach>
+                	
+                	
                 	
                 	<br><br>
               
-                 분야 <input type="checkbox" name="field_sel" value="fin"/>금융  
-                	<input type="checkbox" name="field_sel" value="prod"/>제조 
-                	<input type="checkbox" name="field_sel" value="hosp"/>병원 
-                	<input type="checkbox" name="field_sel" value="publicInst"/>공공기관  
-                	<input type="checkbox" name="field_sel" value="ecomm"/>이커머스 
-                	<input type="checkbox" name="field_sel" value="etx"/>기타
+                분야 &nbsp;
+                 	<c:forEach items="${job_field_list}" var="val">
+             			<input type="checkbox"   name="field_sel" value="${val}"/><c:out value = "${val}" />
+             		</c:forEach>
+         
+                	<br><br>
+                	
+                위치 &nbsp;&nbsp;
+                 	<c:forEach items="${job_loc_list}" var="val">
+             			<input type="checkbox" name="loc_sel" value="${val}"/><c:out value = "${val}" />
+             		</c:forEach>
                 	
                 	<br><br>
-                 위치 <input type="checkbox" name="loc_sel" value="seoul"/>서울 
-                	<input type="checkbox" name="loc_sel" value="gyeonggi"/>경기 
-                	<input type="checkbox" name="loc_sel" value="province"/>지방 
-                	<input type="checkbox" name="loc_sel" value="abroad"/>해외 
-                	
-                	<br><br>
-               	SM/SI
+               	SM/SI &nbsp;&nbsp;
                		<input type="checkbox" name="smsi_sel" value="sm"/>SM
                 	<input type="checkbox" name="smsi_sel" value="sm"/>SI
+                	
+                	<input type="button" style="margin-left:200px;" class="small blue button" value="조회" onclick="search()">
                 </div>
                 
-                	<br><br>
-                	<input type="submit" class='myButton' value="조회">
                 </form>
             </div>
             </div>
@@ -76,43 +132,36 @@
  
  
  <br>
- 
- <div style="width:1300px;">
+ <% int jobNum=1; %>
+ <div style="width:1400px;">
 	
 	<table class="type09" style="margin-left: 40px">
     <thead>
     <tr>
-        <th scope="cols" style="width:60%">제목 </th>
-        <th scope="cols" style="width:20%">위치  </th>
-        <th scope="cols" style="width:10%">작성 </th>
-        <th scope="cols" style="width:10%">작성일 </th>
+        <th style="width:8%">번호</th>
+        <th style="width:52%">제목 </th>
+        <th style="width:20%">위치  </th>
+        <th style="width:10%">작성자 </th>
+        <th style="width:10%">작성일 </th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td><a href="">내용이 들어갑니다.</a></td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-
+    <tbody id="selectedtable">
+    <c:forEach items="${jobList}" var="val">
+    <tr style="height:80px;">
+    	<td style="vertical-align:middle"><%= jobNum++ %></td>
+    	<td style="vertical-align:middle"><a href="showJob?id=${val.getJob_num()}">${val.job_title}</a></td>
+	    <td style="vertical-align:middle">${val.job_loc}</td>
+	    <td style="vertical-align:middle">${val.job_user}</td>
+	    <td style="vertical-align:middle">${val.job_date}</td>
     </tr>
-    <tr>
-        <td><a href="">내용이 들어갑니다.</a></td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-    </tr>
-    <tr>
-        <td><a href="">내용이 들어갑니다.</a></td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-        <td>내용이 들어갑니다.</td>
-    </tr>
+    </c:forEach>
     </tbody>
 </table>
+	<br>
+	<input type="button" class="small blue button" value="작성" onClick="location='uploadJob'"	style="margin-left:1350px;">
 	</div>
 </div>
-
+</div>
 
 </body>
 </html>

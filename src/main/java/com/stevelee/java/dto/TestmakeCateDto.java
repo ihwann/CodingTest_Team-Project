@@ -6,6 +6,7 @@ public class TestmakeCateDto {
 	String test_type;
 	String test_cate_name;
 	String test_type_name;
+	String test_title;
 
 	
 	public TestmakeCateDto() {
@@ -13,12 +14,14 @@ public class TestmakeCateDto {
 	}
 
 
-	public TestmakeCateDto(String test_cate, String test_type, String test_cate_name, String test_type_name) {
+	public TestmakeCateDto(String test_cate, String test_type, String test_cate_name, String test_type_name,
+			String test_title) {
 		super();
 		this.test_cate = test_cate;
 		this.test_type = test_type;
 		this.test_cate_name = test_cate_name;
 		this.test_type_name = test_type_name;
+		this.test_title = test_title;
 	}
 
 
@@ -60,7 +63,19 @@ public class TestmakeCateDto {
 	public void setTest_type_name(String test_type_name) {
 		this.test_type_name = test_type_name;
 	}
-	
+
+
+	public String getTest_title() {
+		return test_title;
+	}
+
+
+	public void setTest_title(String test_title) {
+		this.test_title = test_title;
+	}
+
+
+
 	
 	
 	

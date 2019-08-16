@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stevelee.java.dao.UserDao">
+
+	<select id="selectGeneralIdCheck"
+		parameterType="String" resultType="com.stevelee.java.dto.regi_UserDto">
+		select * from tb_regiUser
+		where user_eMail = #{user_eMail}
+	</select>
+	
+	<select id="selectGeneralPwCheck" parameterType="java.util.Map" resultType="boolean">
+		select * from tb_regiUser
+		where user_eMail = #{user_eMail} AND user_pw = #{user_pw}
+			
+	</select>
+	
+	<select id="selectDtoCheck" parameterType="String" resultType="com.stevelee.java.dto.regi_UserDto">
+		select * from tb_regiUser
+		where user_eMail = #{user_eMail}
+	</select>
+	
+	<update id="cookieUpdate" parameterType="com.stevelee.java.dto.regi_UserDto">
+		UPDATE tb_regiUser SET user_check = #{user_check} where user_eMail = #{user_eMail}
+	</update>
+	
+	<update id="keepLogin" parameterType="map">
+		update tb_regiUser set sessionKey = #{sessionId}, sessionLimit = #{next} where user_eMail = #{userId}
+	</update>
+	
+	<select id="checkUserWithSessionKey" parameterType="String" resultType="com.stevelee.java.dto.regi_UserDto">
+		select * from tb_regiUser where sessionKey = #{sessionId} and sessionLimit > now()
+	</select>
+	
+</mapper>

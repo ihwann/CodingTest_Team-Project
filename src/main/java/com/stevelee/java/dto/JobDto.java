@@ -1,15 +1,16 @@
 package com.stevelee.java.dto;
 
 public class JobDto {
-
-	private int jobs_num;
-	private String jobs_date;
-	private String jobs_user;
-	private String jobs_title;
-	private String jobs_main_lang;
-	private String jobs_field;
-	private String jobs_loc;
-	private String jobs_content;
+		
+	private int job_num;
+	private String job_date;
+	private String job_user;
+	private String job_title;
+	private String job_main_lang;
+	private String job_field;
+	private String job_loc;
+	private String job_smsi;
+	private String job_content;
 	
 	
 	public JobDto() {
@@ -17,97 +18,117 @@ public class JobDto {
 	}
 
 
-	public JobDto(int jobs_num, String jobs_date, String jobs_user, String jobs_title, String jobs_main_lang,
-			String jobs_field, String jobs_loc, String jobs_content) {
+	public JobDto(int job_num, String job_date, String job_smsi, String job_user, String job_title, String job_main_lang,
+			String job_field, String job_loc, String job_content) {
 		super();
-		this.jobs_num = jobs_num;
-		this.jobs_date = jobs_date;
-		this.jobs_user = jobs_user;
-		this.jobs_title = jobs_title;
-		this.jobs_main_lang = jobs_main_lang;
-		this.jobs_field = jobs_field;
-		this.jobs_loc = jobs_loc;
-		this.jobs_content = jobs_content;
+		this.job_num = job_num;
+		this.job_date = job_date;
+		this.job_smsi = job_smsi;
+		this.job_user = job_user;
+		this.job_title = job_title;
+		this.job_main_lang = job_main_lang;
+		this.job_field = job_field;
+		this.job_loc = job_loc;
+		this.job_content = job_content;
 	}
 
 
-	public int getJobs_num() {
-		return jobs_num;
+	
+	public String getJob_smsi() {
+		return job_smsi;
 	}
 
 
-	public void setJobs_num(int jobs_num) {
-		this.jobs_num = jobs_num;
+	public void setJob_smsi(String job_smsi) {
+		this.job_smsi = job_smsi;
 	}
 
 
-	public String getJobs_date() {
-		return jobs_date;
+	public int getJob_num() {
+		return job_num;
 	}
 
 
-	public void setJobs_date(String jobs_date) {
-		this.jobs_date = jobs_date;
+	public void setJob_num(int job_num) {
+		this.job_num = job_num;
 	}
 
 
-	public String getJobs_user() {
-		return jobs_user;
+	public String getJob_date() {
+		return job_date;
 	}
 
 
-	public void setJobs_user(String jobs_user) {
-		this.jobs_user = jobs_user;
+	public void setJob_date(String job_date) {
+		this.job_date = job_date;
 	}
 
 
-	public String getJobs_title() {
-		return jobs_title;
+	public String getJob_user() {
+		return job_user;
 	}
 
 
-	public void setJobs_title(String jobs_title) {
-		this.jobs_title = jobs_title;
+	public void setJob_user(String job_user) {
+		this.job_user = job_user;
 	}
 
 
-	public String getJobs_main_lang() {
-		return jobs_main_lang;
+	public String getJob_title() {
+		return job_title;
 	}
 
 
-	public void setJobs_main_lang(String jobs_main_lang) {
-		this.jobs_main_lang = jobs_main_lang;
+	public void setJob_title(String job_title) {
+		this.job_title = job_title;
 	}
 
 
-	public String getJobs_field() {
-		return jobs_field;
+	public String getJob_main_lang() {
+		return job_main_lang;
 	}
 
 
-	public void setJobs_field(String jobs_field) {
-		this.jobs_field = jobs_field;
+	public void setJob_main_lang(String job_main_lang) {
+		this.job_main_lang = job_main_lang;
 	}
 
 
-	public String getJobs_loc() {
-		return jobs_loc;
+	public String getJob_field() {
+		return job_field;
 	}
 
 
-	public void setJobs_loc(String jobs_loc) {
-		this.jobs_loc = jobs_loc;
+	public void setJob_field(String job_field) {
+		this.job_field = job_field;
 	}
 
 
-	public String getJobs_content() {
-		return jobs_content;
+	public String getJob_loc() {
+		return job_loc;
 	}
 
 
-	public void setJobs_content(String jobs_content) {
-		this.jobs_content = jobs_content;
+	public void setJob_loc(String job_loc) {
+		this.job_loc = job_loc;
+	}
+
+
+	public String getJob_content() {
+		return job_content;
+	}
+
+
+	public void setJob_content(String job_content) {
+		this.job_content = job_content;
+	}
+
+
+	@Override
+	public String toString() {
+		return "JobDto [job_num=" + job_num + ", job_date=" + job_date + ", job_user=" + job_user + ", job_title="
+				+ job_title + ", job_main_lang=" + job_main_lang + ", job_field=" + job_field + ", job_loc=" + job_loc
+				+ ", job_content=" + job_content + "]";
 	}
 	
 	

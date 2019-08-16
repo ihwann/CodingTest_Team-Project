@@ -9,48 +9,61 @@
 <head>
 <meta charset="UTF-8">
 <title>Review</title>
+<style>
+ #type01 {
+ background-color:#EEF7FF;width:10%;vertical-align: middle;
+ 	}
+</style>
 </head>
+<% ReviewDto review = (ReviewDto)request.getAttribute("review");%>
 <body>
-
-<% ReviewDto review = (ReviewDto)request.getAttribute("review");
-%>
-<form action='modifyReview?id=<%=review.getReview_num()%>' >
-
+<div style="width:65%;margin:auto;">
+<span style="margin-left:50px;font-size:30pt;"> 코딩테스트 후기 </span>
+<br><br>
 
 
-<div style="width:1400px">
+
+<form action='modifyReview' >
+
 	
 	<table class="type09" style="margin-left: 40px">
     <tbody>
     <tr>
-    	<th scope="cols" style="width:8%;">작성일</th>
-        <td style="text-align:left;"><%=review.getReview_date() %></td>
+    	<th id="type01">작성자</th>
+    	<td style="text-align:left;vertical-align: middle;height:25px;"><%=review.getReview_user() %></td>
     </tr>
     <tr>
-    	<th scope="cols" style="width:8%">작성자</th>
-    	<td style="text-align:left;"><%=review.getReview_user() %></td>
+    	<th id="type01">작성일</th>
+        <td style="text-align:left;vertical-align: middle;height:20px;"><%=review.getReview_date() %></td>
+    </tr>
+   
+    <tr>
+    	<th id="type01" style="height:100px;">제목</th>
+    	<td style="text-align:left;vertical-align: middle;"><%=review.getReview_title() %></td>
     </tr>
     <tr>
-    	<th scope="cols" style="width:8%">제목</th>
-    	<td style="text-align:left;"><%=review.getReview_title() %></td>
+    	<th id="type01">기업명 </th>
+    	<td style="text-align:left;vertical-align: middle;height:20px;"><%=review.getReview_comp() %></td>
     </tr>
     <tr>
-    	<th scope="cols" style="width:8%">회사</th>
-    	<td style="text-align:left;"><%=review.getReview_comp() %></td>
+    	<td colspan="2" id="textbox01"><%=review.getReview_content() %></td>
     </tr>
-    <tr>
-    	<td><%=review.getReview_content() %></td>
-    </tr>
-    <tbody>
     
-    	
-  
     </tbody>
+    
 </table>
 <br>
-<input type="submit" style="margin-left: 1350px"class="myButton" value="수정">
-	</div>
-</form>
 
+<!-- 
+<input type="submit" class="large blue button"  value="수정" style="float: right">
+<input type="button" onClick="location='uploadReview?id=<%=review.getReview_num() %>'" value="수정하기" style="float:right" class="large red button">
+ -->
+<input type="hidden" name="reviewnum" value="<%=review.getReview_num() %>">
+<!--<input type="submit" class="large blue button"  value="수정하기" style="float: right"> -->
+<input type="button" onClick="location='deleteReview?id=<%=review.getReview_num() %>'" value="삭제" style="float:right" class="large red button">
+
+	
+</form>
+</div>
 </body>
 </html>

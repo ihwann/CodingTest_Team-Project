@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 
 <head>
@@ -8,69 +9,58 @@
 </head>
 	
 <body>
+
+<div style="width:60%;margin:auto;">
+	<span id="topText">구인 작성  </span><br><br><br>
+	<div class="form-style">
+	<form action="uploadJob" method="POST">
+	
+	<select id="selbox" name="job_main_lang" >
+				<option value="">--언어 선택-- </option>
+				<c:forEach items="${job_main_lang_list}" var="val">
+				<option value="${val}">
+				 <c:out value = "${val}" />
+				</option>
+				</c:forEach> 
+	</select><br><br>
+	<select  id="selbox" name="job_field" >
+				<option value="">--분야 선택-- </option>
+				<c:forEach items="${job_field_list}" var="val">
+				<option value="${val}">
+				 <c:out value = "${val}" />
+				</option>
+				</c:forEach>
+	</select><br><br>
+	<select  id="selbox" name="job_loc" >
+				<option value="">--지역 선택-- </option>
+				<c:forEach items="${job_loc_list}" var="val">
+				<option value="${val}">
+				 <c:out value = "${val}" />
+				</option>
+				</c:forEach>
+	</select>
+	<br><br>
+	<select id="selbox" name="job_smsi" >
+		<option value="">--SM/SI--</option>
+		<option value="SM">SM</option>
+		<option value="SI">SI</option>
+	</select>
+	
+	<br>
+	<br>
+	<input type="text" class="text-style"  style="width:800px" name="job_title" placeholder="제목을 입력하세요"><br><br>
     
-    
- <div class="form-style">
-    <form>
-    <br>
-   	
-    <div class="main_lang_div">
-    언어 &nbsp;
-    	<select>
-    		<option value="">--언어 선택--</option>
-    		<option value="java">Java</option>
-    		<option value="ckind">C계열 </option>
-    		<option value="asp">ASP</option>
-    		<option value="python">파이썬 </option>
-    		<option value="etc">기타 </option>
-    	
-    	</select><br><br>
-    </div>
-    <div class="field_div">
-    분야  &nbsp;
-    	<select>
-    		<option value="">--분야 선택--</option>
-    		<option value="fin">금융 </option>
-    		<option value="prod">제조  </option>
-    		<option value="hosp">병원 </option>
-    		<option value="publicIns">공공기관  </option>
-    		<option value="ecomm">이커머스  </option>
-    		<option value="etc">기타   </option>
-    	
-    	</select><br><br>
-    </div>
-    <div class="loc_div">
-     지역   &nbsp;
-    	<select>
-    		<option value="">--지역 선택--</option>
-    		<option value="seoul">서울  </option>
-    		<option value="gyeonggi">경기  </option>
-    		<option value="prov">지방  </option>
-    		<option value="abroad">해외  </option>
-    	</select><br><br>
-    </div>
-    <div class="smsi_div">
-    SM/SI  &nbsp;
-    	<select>
-    		<option value="">--SM/SI--</option>
-    		<option value="sm">SM  </option>
-    		<option value="si">SI  </option>
-    	</select><br><br>
-    </div>
-    <input type="text" class="text-style"  style="width:800px;"name="title" placeholder="제목을 입력하세요"><br><br>
-    <div class="mes_div">
-    <textarea id="message" class="text-style" name="message" rows="20" cols="120" placeholder="내용을 입력해주세요 "></textarea>
+    <textarea id="message" class="text-style" name="job_content" rows="20" cols="120" placeholder="내용을 입력해주세요 "></textarea>
     <br><br>
-    </div>
- 	
- 	<div class="submit_div" style="width:900px">
-    &nbsp;&nbsp;<input type="submit" class="myButton" value=" 저장 " style="float:right"> 
-    &nbsp;&nbsp;<input type="button" class="myButton" value="뒤로" style="float:right">
+	<div class="submit_div" style="width:900px">
+    <input type="submit" class="myButton" value="저장" style="float:right"> 
+    <input type="button" onClick="location='jobs'" class="myButton" value="뒤로" style="float:right">
     
     </div>
-    </form>
-    </div>
-    
- 	
+	
+	</form>
+	
+</div>
+ 	</div>
 </body>
 </html>

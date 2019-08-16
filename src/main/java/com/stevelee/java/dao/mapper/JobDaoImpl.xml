@@ -5,16 +5,38 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.stevelee.java.dao.JobDao">
-	<select id="select_all_job" resultType="com.stevelee.java.dto.JobDto" parameterType="int">
-		select * from tb_jobs
-		where review_num = #{jobs_num}
-		
-		
+	
+	
+	<select id="select_all_job" resultType="com.stevelee.java.dto.JobDto">
+		select * from tb_job 
+		order by job_date DESC
 	</select>
 	
-	<select id="select_all_job_main_lang" resultType="com.stevelee.java.dto.JobDto" parameterType="int">
-		select distinct jobs_main_lang from tb_review
+	<select id="select_all_job_main_lang" resultType="String">
+		select distinct job_main_lang from tb_job
 	</select>
+	
+	<select id="select_all_job_field" resultType="String">
+		select distinct job_field from tb_job
+	</select>
+	
+	<select id="select_all_job_loc" resultType="String">
+		select distinct job_loc from tb_job
+	</select>
+	
+	<select id="select_job" resultType="com.stevelee.java.dto.JobDto" parameterType="int">
+		select * from tb_job where job_num=#{id}
+	</select>
+	
+	<insert id="insert_job" 
+		parameterType="com.stevelee.java.dto.JobDto">
+		insert into tb_job(job_date, job_user, job_title, job_main_lang, job_field, job_loc, job_content, job_smsi) 
+		values(NOW(), #{job_user}, #{job_title}, #{job_main_lang}, #{job_field}, #{job_loc}, #{job_content}, #{job_smsi})	
+	</insert>
+	
+	<delete id="delete_job" parameterType="int"> 
+		delete from tb_job where job_num = #{id} 
+	</delete> 
 
 	
 </mapper>

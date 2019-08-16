@@ -23,7 +23,7 @@
 		return true;
 	}
 </script>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css">
 </head>
 <body>
 
@@ -303,7 +303,7 @@
 					</p>
 				</div>
 				<br />
-				<form name = "termsOK" role="form" action="/java/regi" onsubmit="return CheckForm(this)" align="center" method='POST'>
+				<form name = "termsOK" role="form" action="regi" onsubmit="return CheckForm(this)" align="center" method='POST'>
 					<div class="form-group" >
 						<label class="checkbox-inline"> <input type="checkbox"
 							name="termsAgree" id="termsAgree" value=""><font color="black" size="3px">모든 약관에 동의합니다.</font>

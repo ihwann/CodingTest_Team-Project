@@ -181,7 +181,7 @@ $(document).ready(function() {
 });
 
 </script>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css">
 </head>
 <body>
 <div class="row">
@@ -189,7 +189,8 @@ $(document).ready(function() {
 		<section>
 		<h1 class="entry-title"><span>&nbsp;&nbsp;회원가입</span></h1></section>
 		<hr>
-		<form class="form-horizontal" method="post" action="/java/regiControl" accept-charset="utf-8">
+		
+		<form class="form-horizontal" method="post" action="regiControl" accept-charset="utf-8">
 			<!-- 본인확인 이메일 -->
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="user_eMail">이메일</label>
@@ -199,8 +200,7 @@ $(document).ready(function() {
 						<input type="email" class="form-control" name="user_eMail" id="user_eMail" placeholder="정확하게 써주세요" required>
 					</div>
 					<div class="check_font" id="email_check"></div><br>
-					<button class="btn btn-primary" id="btn_sendAuth" disabled="disabled">
-						인증하기 </button>
+					<button class="btn btn-primary" id="btn_sendAuth" disabled="disabled">인증하기 </button>
 					<div class="check_font" id="send_check"></div>
 				</div>
 			</div>

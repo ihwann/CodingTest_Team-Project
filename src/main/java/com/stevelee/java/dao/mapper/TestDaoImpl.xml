@@ -4,142 +4,163 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.stevelee.java.dao.TestDao">
-	
-	
-	
-	<!-- 선택한 문제 출력 -->	
-	<select id="select_test" resultType="com.stevelee.java.dto.GetTestDto" parameterType="com.stevelee.java.dto.TestDto">
-		SELECT *
-		FROM tb_testmake_contents
-		WHERE test_no = 
-		<if test = "test_result_no != 0">
-			#{test_result_no}
-		</if>
-		<if test = "test_result_no == null or test_result_no == '' ">
-			(
-				SELECT MIN(test_no)
-				FROM tb_testmake_title 
-				WHERE test_cate = #{cate}
-				AND test_no > 
-					(
-						SELECT NVL(MAX(test_result_no), 0)
-						FROM tb_test_result
-						WHERE test_result = "pass"
-						AND test_result_user = #{test_result_user}
-						AND test_result_no IN 
-							(
-								SELECT test_no
-								FROM tb_testmake_title
-								WHERE test_cate = #{cate}
-							)
-					)
-			)
-		</if>
-		<!-- 
-		SELECT *
-		FROM tb_testmake_contents
-		WHERE test_no = 
-		<if test = "test_result_no != null">#{test_result_no}</if>
-		<if test = "test_result_no == null">
-			(
-				SELECT MIN(test_no)
-				FROM tb_testmake_title 
-				WHERE test_cate = #{cate}
-				AND test_no > 
-					(
-						SELECT NVL(MAX(test_result_no), 0)
-						FROM tb_test_result
-						WHERE test_result = "pass"
-						AND test_result_user = #{test_result_user}
-						AND test_result_no IN 
-							(
-								SELECT test_no
-								FROM tb_testmake_title
-								WHERE test_cate = #{cate}
-							)
-					)
-			)
-		</if>
-		 -->
-	</select>
-	
-	
-	
-	<!-- 해당유형 전체 문제 리스트 정보 확인 -->	
-	<select id="select_test_list" resultType="Integer" parameterType="String">
-		SELECT * FROM tb_testmake_title WHERE test_cate = #{cate}
-	</select>
-	
-	
-	
-	<!-- 문제결과 저장 -->
-	<insert id="insert_result" parameterType="com.stevelee.java.dto.TestDto">
-		INSERT INTO tb_test_result(
-		test_result_no, 
-		test_result_user, 
-		test_result_code, 
-		test_result, 
-		test_result_time, 
-		test_result_useMemory, 
-		test_result_runingTime, 
-		test_result_count, 
-		test_result_error, 
-		test_result_codeLength,
-		test_result_del,
-		test_result_regi)
-		VALUE(
-		#{result_no}, 
-		#{result_user}, 
-		#{result_code}, 
-		#{result},
-		#{result_time},
-		#{result_useMemory}, 
-		#{result_runingTime},  
-		#{result_count}, 
-		#{result_error}, 
-		#{result_codeLength},
-		'N',
-		now())
-	</insert>
-	
-	
-	
-	<!-- 문제 임시저장 -->
-	<insert id="save_test" parameterType="com.stevelee.java.dto.TestDto">
-		INSERT INTO tb_test_result(
-		test_result_no,
-		test_result_user,
-		test_result_code,
-		test_result,
-		test_result_count,
-		test_result_codeLength)
-		VALUE(
-		#{result_no},
-		#{result_user},
-		#{result_code},
-		#{result},
-		#{result_count},
-		#{result_codeLength})
-	</insert>
-	
-	
-	
-	<!-- 해당문제의 과거 이력 리스트 -->	
-	<select id="get_test_his" resultType="com.stevelee.java.dto.TestDto" parameterType="com.stevelee.java.dto.TestDto">
-		SELECT * FROM tb_test_result
-		WHERE test_result_no = #{test_result_no}
-		AND test_result_del = 'N'
-		AND test_result_user = #{test_result_user}
-		ORDER BY test_result_regi DESC
-	</select>
-	
-	
-	
-	<!-- 선택한 과거 이력 상세조회 -->	
-	<select id="select_his" resultType="com.stevelee.java.dto.TestDto" parameterType="int">
-		SELECT * FROM tb_test_result
-		WHERE test_result_seq = #{seq}
-	</select>
-	
+   
+   
+   
+   <!-- 선택한 문제 출력 -->   
+   <select id="select_test" resultType="com.stevelee.java.dto.GetTestDto" parameterType="com.stevelee.java.dto.TestDto">
+      SELECT *
+      FROM tb_testmake_contents
+      WHERE test_no = 
+      <if test = "test_result_no != 0">
+         #{test_result_no}
+      </if>
+      <if test = "test_result_no == null or test_result_no == '' ">
+         (
+            SELECT MIN(test_no)
+            FROM tb_testmake_title 
+            WHERE test_cate = #{cate}
+            AND test_no > 
+               (
+                  SELECT NVL(MAX(test_result_no), 0)
+                  FROM tb_test_result
+                  WHERE test_result = "pass"
+                  AND test_result_user = #{test_result_user}
+                  AND test_result_no IN 
+                     (
+                        SELECT test_no
+                        FROM tb_testmake_title
+                        WHERE test_cate = #{cate}
+                     )
+               )
+         )
+      </if>
+      order by sent_no
+      <!-- 
+      SELECT *
+      FROM tb_testmake_contents
+      WHERE test_no = 
+      <if test = "test_result_no != null">#{test_result_no}</if>
+      <if test = "test_result_no == null">
+         (
+            SELECT MIN(test_no)
+            FROM tb_testmake_title 
+            WHERE test_cate = #{cate}
+            AND test_no > 
+               (
+                  SELECT NVL(MAX(test_result_no), 0)
+                  FROM tb_test_result
+                  WHERE test_result = "pass"
+                  AND test_result_user = #{test_result_user}
+                  AND test_result_no IN 
+                     (
+                        SELECT test_no
+                        FROM tb_testmake_title
+                        WHERE test_cate = #{cate}
+                     )
+               )
+         )
+      </if>
+       -->
+   </select>
+      <!-- 해당유형 전체 문제 리스트 정보 확인 -->   
+   <select id="select_test_cate" resultType="com.stevelee.java.dto.TestmakeCateDto" parameterType="Integer">
+    select a.*  , b.test_title from tb_testmake_cate a , tb_testmake_title b 
+	where b.test_no = #{param1} and a.test_type = b.test_type and a.test_cate = b.test_cate;
+   </select>
+
+   
+   <!-- 해당유형 전체 문제 리스트 정보 확인 -->   
+   <select id="select_test_list" resultType="Integer" parameterType="String">
+      SELECT * FROM tb_testmake_title WHERE test_cate = #{cate}
+   </select>
+   
+   
+   
+   <!-- 문제결과 저장 -->
+   <insert id="insert_result" parameterType="com.stevelee.java.dto.TestDto">
+      INSERT INTO tb_test_result(
+      test_result_no, 
+      test_result_user, 
+      test_result_code, 
+      test_result, 
+      test_result_time, 
+      test_result_useMemory, 
+      test_result_runingTime, 
+      test_result_count, 
+      test_result_error, 
+      test_result_codeLength,
+      test_result_del,
+      test_result_regi)
+      VALUE(
+      #{test_result_no}, 
+      #{test_result_user}, 
+      #{test_result_code}, 
+      #{test_result},
+      #{test_result_time},
+      #{test_result_useMemory}, 
+      #{test_result_runingTime},  
+      #{test_result_count}, 
+      #{test_result_error}, 
+      #{test_result_codeLength},
+      'N',
+      now())
+   </insert>
+   
+   
+   
+   <!-- 문제 임시저장 -->
+   <insert id="save_test" parameterType="com.stevelee.java.dto.TestDto">
+      INSERT INTO tb_test_result(
+      test_result_no,
+      test_result_user,
+      test_result_code,
+      test_result,
+      test_result_count,
+      test_result_codeLength)
+      VALUE(
+      #{result_no},
+      #{result_user},
+      #{result_code},
+      #{result},
+      #{result_count},
+      #{result_codeLength})
+   </insert>
+   
+   
+   
+   <!-- 해당문제의 과거 이력 리스트 -->   
+   <select id="get_test_his" resultType="com.stevelee.java.dto.TestDto" parameterType="com.stevelee.java.dto.TestDto">
+      SELECT * FROM tb_test_result
+      WHERE test_result_no = #{test_result_no}
+      AND test_result_del = 'N'
+      AND test_result_user = #{test_result_user}
+      ORDER BY test_result_regi DESC
+   </select>
+   
+   
+   
+   <!-- 선택한 과거 이력 상세조회 -->   
+   <select id="select_his" resultType="com.stevelee.java.dto.TestDto" parameterType="int">
+      SELECT * FROM tb_test_result
+      WHERE test_result_seq = #{seq}
+   </select>
+   
+   
+   
+   <!-- input intput 조회 -->   
+   <select id="setInput" resultType="com.stevelee.java.dto.GetTestDto" parameterType="int">
+      SELECT * FROM tb_testmake_contents
+      WHERE test_no = #{test_no} 
+      AND sent_type = 'sentence_inputex'
+   </select>
+   
+   <!-- input output 조회 -->   
+   <select id="setOutput" resultType="com.stevelee.java.dto.GetTestDto" parameterType="int">
+      SELECT * FROM tb_testmake_contents
+      WHERE test_no = #{test_no} 
+      AND sent_type = 'sentence_outputex'
+   </select>
 
 </mapper>
+

@@ -4,5 +4,16 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.stevelee.java.dao.AnalyticsDao">
+	<select id="select_analytics_result" parameterType="string" resultType="hashmap">
+		SELECT title.test_no, title.test_cate, title.test_type, title.test_title, result.test_result
+		FROM tb_testmake_title title INNER JOIN tb_test_result result
+		ON title.test_no = result.test_result_no AND result.test_result_user = #{email}
+	</select>
 	
+	<select id="select_analytics_cate_succ_result" parameterType="string" resultType="hashmap">
+		SELECT count(*) as cnt, title.test_cate as cate
+		FROM tb_testmake_title title INNER JOIN tb_test_result result
+		ON title.test_no = result.test_result_no AND result.test_result_user = #{email} AND result.test_result = 'pass'
+		GROUP BY title.test_cate
+	</select>
 </mapper>

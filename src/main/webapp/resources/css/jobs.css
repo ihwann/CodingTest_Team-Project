@@ -7,11 +7,11 @@
 .choicebox {
     	width:480px;
     	background-color:transparent;
-    	color:white;
-    	
+    	color:gray;
 }
-.choice_box{
-    	color:white;
+#choice_box{
+    	color:black;
+    	
 }
     
 label,
@@ -35,10 +35,10 @@ label {
 .form-style {
 	margin:0 auto;
 	width:1800px;
-	color:white;
+	color:gray;
 }
 select {
 	
-	width:200px;
+	width:100px;
 	
 }

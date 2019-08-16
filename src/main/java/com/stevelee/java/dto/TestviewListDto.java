@@ -6,6 +6,7 @@ public class TestviewListDto {
 	String test_cate;
 	String test_type;
 	String test_title;
+	String test_type_name;
 	
 	
 	public TestviewListDto() {
@@ -50,6 +51,14 @@ public class TestviewListDto {
 
 	public void setTest_title(String test_title) {
 		this.test_title = test_title;
+	}
+
+	public String getTest_type_name() {
+		return test_type_name;
+	}
+
+	public void setTest_type_name(String test_title_name) {
+		this.test_type_name = test_title_name;
 	}
 	
 	

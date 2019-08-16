@@ -2,6 +2,8 @@ package com.stevelee.java.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +57,20 @@ public class ReviewListService {
 		
 	}
 	
+	public int delete_review(int id) throws SQLException{
+		
+		reviewDao = reviewSqlSession.getMapper(ReviewDao.class);
+		
+		return reviewDao.delete_review(id);
+	}
+	
+public ArrayList<ReviewDto> select_search_review(Map<String,String> map) throws SQLException{
+		
+	
+		
+			reviewDao = reviewSqlSession.getMapper(ReviewDao.class);
+		
+		return reviewDao.select_search_review(map);
+	}
 	
 }

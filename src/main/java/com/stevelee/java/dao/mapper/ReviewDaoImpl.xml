@@ -23,7 +23,17 @@
 		values(#{review_user}, NOW(), #{review_title}, #{review_comp}, #{review_content})	
 	</insert>
 	
+	<delete id="delete_review" parameterType="int"> 
+		delete from tb_review where review_num = #{id} 
+	</delete> 
 	
+	
+	<select id="select_search_review" parameterType="map" resultType="com.stevelee.java.dto.ReviewDto">
+		select * 
+		from tb_review
+		where ${catName} LIKE CONCAT('%',#{keyName}, '%') AND review_comp LIKE CONCAT('%',#{compName}, '%')
+		order by review_date DESC
+	</select>
 	
 	
 </mapper>
